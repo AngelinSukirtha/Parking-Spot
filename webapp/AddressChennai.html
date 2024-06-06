@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Address</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	color: #333;
+}
+
+.container {
+	max-width: 600px;
+	margin: 50px auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 10px;
+	text-align: left;
+	position: relative;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+
+label {
+	cursor: pointer;
+}
+
+.select-button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.select-button:hover {
+	background-color: #3c8f40;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h2>Select Address</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Address</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<form action="ParkingSpotsServlet" method="post">
+					<td>Mylapore<input type="hidden" name="address"
+						value="Mylapore">
+						<button class="select-button">Select</button>
+					</td>
+					</form>
+				</tr>
+				<tr>
+					<form action="ParkingSpotsServlet" method="post">
+					<td>Velachery<input type="hidden" name="address"
+						value="Velachery">
+						<button class="select-button">Select</button>
+					</td>
+					</form>
+				</tr>
+				<tr>
+					<form action="ParkingSpotsServlet" method="post">
+					<td>Perungudi<input type="hidden" name="address"
+						value="Perungudi">
+						<button class="select-button">Select</button>
+					</td>
+					</form>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+</body>
+</html>

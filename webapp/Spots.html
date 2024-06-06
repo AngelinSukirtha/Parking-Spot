@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<title>Location Choosing Page</title>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	margin-left: 60px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+	align-items: center;
+	height: 100vh;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(2, 100px);
+	grid-gap: 20px;
+}
+
+.cell {
+	width: 100px;
+	height: 100px;
+	border: 1px solid black;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cell:hover {
+	background-color: #f0f0f0;
+}
+
+.grid1 {
+	margin-left: 150px;
+	display: grid;
+	grid-template-columns: repeat(3, 100px);
+	grid-gap: 8px;
+}
+
+.cell1 {
+	width: 80px;
+	height: 100px;
+	border: 1px solid black;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cell1:hover {
+	background-color: #f0f0f0;
+}
+
+.grid2 {
+	margin-left: 150px;
+	display: grid;
+	grid-template-columns: repeat(2, 100px);
+	grid-gap: 75px;
+}
+
+.cell2 {
+	width: 150px;
+	height: 100px;
+	border: 1px solid black;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cell2:hover {
+	background-color: #f0f0f0;
+}
+
+.vehicle-buttons {
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.vehicle-button {
+	padding: 10px 20px;
+	border: none;
+	cursor: pointer;
+	background-color: rgb(253, 220, 54);
+	color: black;
+	border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+	<div class="vehicle-buttons">
+		<button class="vehicle-button" style="margin-left: 140px;">
+			<i class="fas fa-car"></i>CAR
+		</button>
+		<button class="vehicle-button" style="margin-right: 70px;">
+			<i class="fas fa-bicycle"></i>BIKE
+		</button>
+		<button class="vehicle-button" style="margin-right: 160px;">
+			<i class="fas fa-truck"></i>TRUCK
+		</button>
+	</div>
+
+	<div class="container">
+		<div class="grid">
+			<div class="cell">C01</div>
+			<div class="cell">C02</div>
+			<div class="cell">C03</div>
+			<div class="cell">C04</div>
+			<div class="cell">C05</div>
+			<div class="cell">C06</div>
+			<div class="cell">C07</div>
+			<div class="cell">C08</div>
+			<div class="cell">C09</div>
+			<div class="cell">C10</div>
+			<div class="cell">C11</div>
+			<div class="cell">C12</div>
+			<div class="cell">C13</div>
+			<div class="cell">C14</div>
+			<div class="cell">C15</div>
+			<div class="cell">C16</div>
+			<div class="cell">C17</div>
+			<div class="cell">C18</div>
+			<div class="cell">C19</div>
+			<div class="cell">C20</div>
+		</div>
+
+		<div class="grid1">
+			<div class="cell1">B01</div>
+			<div class="cell1">B02</div>
+			<div class="cell1">B03</div>
+			<div class="cell1">B04</div>
+			<div class="cell1">B05</div>
+			<div class="cell1">B06</div>
+			<div class="cell1">B07</div>
+			<div class="cell1">B08</div>
+			<div class="cell1">B09</div>
+			<div class="cell1">B10</div>
+			<div class="cell1">B11</div>
+			<div class="cell1">B12</div>
+			<div class="cell1">B13</div>
+			<div class="cell1">B14</div>
+			<div class="cell1">B15</div>
+			<div class="cell1">B16</div>
+			<div class="cell1">B17</div>
+			<div class="cell1">B18</div>
+			<div class="cell1">B19</div>
+			<div class="cell1">B20</div>
+			<div class="cell1">B21</div>
+			<div class="cell1">B22</div>
+			<div class="cell1">B23</div>
+			<div class="cell1">B24</div>
+			<div class="cell1">B25</div>
+			<div class="cell1">B26</div>
+			<div class="cell1">B27</div>
+			<div class="cell1">B28</div>
+			<div class="cell1">B29</div>
+			<div class="cell1">B30</div>
+			<div class="cell1">B31</div>
+			<div class="cell1">B32</div>
+			<div class="cell1">B33</div>
+		</div>
+
+		<div class="grid2">
+			<div class="cell2">T01</div>
+			<div class="cell2">T02</div>
+			<div class="cell2">T03</div>
+			<div class="cell2">T04</div>
+			<div class="cell2">T05</div>
+			<div class="cell2">T06</div>
+			<div class="cell2">T07</div>
+			<div class="cell2">T08</div>
+			<div class="cell2">T09</div>
+			<div class="cell2">T10</div>
+			<div class="cell2">T11</div>
+			<div class="cell2">T12</div>
+			<div class="cell2">T13</div>
+			<div class="cell2">T14</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -98,22 +98,24 @@ public class RegistrationLoginImpl implements RegistrationLoginDAO {
 			System.out.println(rows + " rows updated");
 		}
 	}
+	
 
-//	public  void getUserById(RegistrationLogin registrationLogin) throws ClassNotFoundException, SQLException {
-//		Connection connection = MySQLConnection.getConnection();
-//		String query = "SELECT * FROM Users WHERE id=?";
-//		PreparedStatement p = connection.prepareStatement(query);
-//	    p.setInt(1, registrationLogin.getUserId());
-//	    ResultSet rows = p.executeQuery();	        
-//	        if (rows.next()) {
-//	        	registrationLogin.setId(registrationLogin.getInt("id"));
-//	        	registrationLogin.setUserName(registrationLogin.getString("user_name"));
-//	            registrationLogin.setUserPassword(registrationLogin.getString("user_password"));
-//	            registrationLogin.setPhoneNumber(registrationLogin.getString("phone_number"));
-//	            registrationLogin.setEmail(registrationLogin.getString("email"));
-//	      
-//	        }
-//	    }return user;
-//}
+	public RegistrationLogin getUserById(RegistrationLogin registrationLogin)
+			throws ClassNotFoundException, SQLException {
+		Connection connection = MySQLConnection.getConnection();
+		String query = "SELECT * FROM Users WHERE email=?";
+		PreparedStatement p = connection.prepareStatement(query);
+		p.setString(1, registrationLogin.getEmail());
+		ResultSet rows = p.executeQuery();
+		if (rows.next()) {
+			registrationLogin.setUserId(rows.getInt("user_id"));
+			registrationLogin.setUserName(rows.getString("user_name"));
+			registrationLogin.setUserPassword(rows.getString("user_password"));
+			registrationLogin.setPhoneNumber(rows.getString("phone_number"));
+			registrationLogin.setEmail(rows.getString("email"));
+			return registrationLogin;
+		}
+		return null;
+	}
 
 }

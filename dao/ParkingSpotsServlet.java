@@ -35,8 +35,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//		String locationName = request.getParameter("locationName");
-//		parkingSpots.setLocationName(locationName);
+
 	}
 
 	/**
@@ -48,8 +47,10 @@ public class ParkingSpotsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String locationName = request.getParameter("action");
 		String address = request.getParameter("address");
-
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
+		int id = registrationLogin.getUserId();
+		System.out.println(id);
 
 		if (locationName != null) {
 			parkingSpots.setLocationName(locationName);
@@ -58,18 +59,15 @@ public class ParkingSpotsServlet extends HttpServlet {
 			try {
 				switch (locationName) {
 				case "Chennai":
-					parkingSpotsDAO.addLocationName(parkingSpots);
-					session.setAttribute("locationName", locationName);
+					parkingSpotsDAO.addLocationName(parkingSpots, id);
 					request.getRequestDispatcher("AddressChennai.html").forward(request, response);
 					break;
 				case "Madurai":
-					parkingSpotsDAO.addLocationName(parkingSpots);
-					session.setAttribute("locationName", locationName);
+					parkingSpotsDAO.addLocationName(parkingSpots, id);
 					request.getRequestDispatcher("AddressMadurai.html").forward(request, response);
 					break;
 				case "Bangalore":
-					parkingSpotsDAO.addLocationName(parkingSpots);
-					session.setAttribute("locationName", locationName);
+					parkingSpotsDAO.addLocationName(parkingSpots, id);
 					request.getRequestDispatcher("AddressBangalore.html").forward(request, response);
 					break;
 				default:
@@ -96,8 +94,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 				case "Jayanagar":
 				case "Whitefield":
 				case "Domlur":
-					parkingSpotsDAO.addAddress(parkingSpots);
-					session.setAttribute("address", address);
+					parkingSpotsDAO.addAddress(parkingSpots, id);
 					request.getRequestDispatcher("Spots.html").forward(request, response);
 					break;
 				default:
@@ -108,6 +105,34 @@ public class ParkingSpotsServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-	}
+//		String[] selectedLocations = request.getParameterValues("selectedLocations");
+//		if (selectedLocations != null) {
+//			for (String spotNumber : selectedLocations) {
+//				try {
+//					parkingSpots.setSpotNumber(spotNumber);
+//					parkingSpotsDAO.addSpotNumber(parkingSpots, id);
+//					request.getRequestDispatcher("Index.html").forward(request, response);
+//				} catch (ClassNotFoundException | SQLException e) {
+//					e.printStackTrace();
+//					request.getRequestDispatcher("Index.html").forward(request, response);
+//				}
+//			}
+//		}
+		String[] selectedLocations = request.getParameterValues("selectedCells[]");
 
+		if (selectedLocations != null && selectedLocations.length > 0) {
+			for (String spotNumber : selectedLocations) {
+				try {
+					parkingSpots.setSpotNumber(spotNumber);
+					parkingSpotsDAO.addSpotNumber(parkingSpots, id);
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			response.sendRedirect("Index.html");
+		} else {
+			response.sendRedirect("Location.html");
+		}
+
+	}
 }

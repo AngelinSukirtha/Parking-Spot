@@ -1,14 +1,17 @@
 package com.chainsys.model;
 
 public class ParkingSpots {
+	int UserId;
 	int locationId;
 	String locationName;
 	String address;
 	String spotNumber;
 	String spotStatus;
 
-	public ParkingSpots(int locationId, String locationName, String address, String spotNumber, String spotStatus) {
+	public ParkingSpots(int userId, int locationId, String locationName, String address, String spotNumber,
+			String spotStatus) {
 		super();
+		UserId = userId;
 		this.locationId = locationId;
 		this.locationName = locationName;
 		this.address = address;
@@ -16,16 +19,21 @@ public class ParkingSpots {
 		this.spotStatus = spotStatus;
 	}
 
-	public ParkingSpots() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
-		return "ParkingSpots [locationId=" + locationId + ", locationName=" + locationName + ", address=" + address
-				+ ", spotNumber=" + spotNumber + ", spotStatus=" + spotStatus + ", getLocationId()=" + getLocationId()
-				+ ", getLocationName()=" + getLocationName() + ", getAddress()=" + getAddress() + ", getSpotNumber()="
-				+ getSpotNumber() + ", getSpotStatus()=" + getSpotStatus() + "]";
+		return "ParkingSpots [UserId=" + UserId + ", locationId=" + locationId + ", locationName=" + locationName
+				+ ", address=" + address + ", spotNumber=" + spotNumber + ", spotStatus=" + spotStatus
+				+ ", getUserId()=" + getUserId() + ", getLocationId()=" + getLocationId() + ", getLocationName()="
+				+ getLocationName() + ", getAddress()=" + getAddress() + ", getSpotNumber()=" + getSpotNumber()
+				+ ", getSpotStatus()=" + getSpotStatus() + "]";
+	}
+
+	public int getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(int userId) {
+		UserId = userId;
 	}
 
 	public int getLocationId() {
@@ -66,6 +74,10 @@ public class ParkingSpots {
 
 	public void setSpotStatus(String spotStatus) {
 		this.spotStatus = spotStatus;
+	}
+
+	public ParkingSpots() {
+		// TODO Auto-generated constructor stub
 	}
 
 }

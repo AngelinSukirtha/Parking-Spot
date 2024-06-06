@@ -65,13 +65,7 @@ public class RegistrationLoginServlet extends HttpServlet {
 				try {
 
 					if (registrationLoginImpl.userRegistration(registrationLogin)) {
-						HttpSession session = request.getSession();
-						session.setAttribute("userName", userName);
-						session.setAttribute("userPassword", userPassword);
-						session.setAttribute("phoneNumber", phoneNumber);
-						session.setAttribute("email", email);
 						response.sendRedirect("UserLogin.html");
-
 					} else {
 						response.sendRedirect("UserRegister.html");
 					}
@@ -85,11 +79,7 @@ public class RegistrationLoginServlet extends HttpServlet {
 				try {
 					if (userName.equals("Angelin") && userPassword.equals("Angelin1")
 							&& phoneNumber.equals("9344868945") && email.equals("angelin@gmail.com")) {
-						HttpSession session = request.getSession();
-						session.setAttribute("userName", userName);
-						session.setAttribute("userPassword", userPassword);
-						session.setAttribute("phoneNumber", phoneNumber);
-						session.setAttribute("email", email);
+
 						List<RegistrationLogin> list = registrationLoginImpl.read();
 						request.setAttribute("list", list);
 						RequestDispatcher dispatcher = request.getRequestDispatcher("ParkingSpot.jsp");
@@ -97,11 +87,12 @@ public class RegistrationLoginServlet extends HttpServlet {
 					} else {
 						String email1 = registrationLoginImpl.userLogin(registrationLogin);
 						if (email.equals(email1)) {
+							RegistrationLogin userId = registrationLoginImpl.getUserById(registrationLogin);
+							System.out.println(userId);
 							HttpSession session = request.getSession();
-							session.setAttribute("userName", userName);
-							session.setAttribute("userPassword", userPassword);
-							session.setAttribute("phoneNumber", phoneNumber);
-							session.setAttribute("email", email);
+							System.out.println(userId);
+							session.setAttribute("userId", userId);
+
 							request.getRequestDispatcher("Location.html").forward(request, response);
 						} else {
 							request.getRequestDispatcher("UserLogin.html").forward(request, response);

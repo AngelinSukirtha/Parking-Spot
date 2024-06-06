@@ -31,12 +31,13 @@ public class ParkingSpotsDAO {
 		PreparedStatement statement = connection.prepareStatement(query);
 		ResultSet resultSet = statement.executeQuery();
 		while (resultSet.next()) {
+			int userId = resultSet.getInt("user_id");
 			int locationId = resultSet.getInt("location_id");
 			String locationName = resultSet.getString("location_name");
 			String address = resultSet.getString("address");
 			String spotNumber = resultSet.getString("spot_number");
 			String spotStatus = resultSet.getString("spot_status");
-			parkingSpots.add(new ParkingSpots(locationId, locationName, address, spotNumber, spotStatus));
+			parkingSpots.add(new ParkingSpots(userId, locationId, locationName, address, spotNumber, spotStatus));
 		}
 		return parkingSpots;
 	}
@@ -50,20 +51,30 @@ public class ParkingSpotsDAO {
 		statement.executeUpdate();
 	}
 
-	public void addLocationName(ParkingSpots parkingSpots) throws ClassNotFoundException, SQLException {
+	public void addLocationName(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "INSERT INTO Parking_Spots (location_name, address, spot_number, spot_status) VALUES (?, '', 0, '')";
+		String query = "INSERT INTO Parking_Spots (user_id, location_name, address, spot_number, spot_status) VALUES (?, ?, '', 0, '')";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, parkingSpots.getLocationName());
+		statement.setInt(1, id);
+		statement.setString(2, parkingSpots.getLocationName());
+		statement.execute();
+	}
+
+	public void addAddress(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
+		Connection connection = MySQLConnection.getConnection();
+		String query = "UPDATE Parking_Spots SET address = ? WHERE user_id = ?";
+		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1, parkingSpots.getAddress());
+		statement.setInt(2, id);
 		statement.executeUpdate();
 	}
 
-	public void addAddress(ParkingSpots parkingSpots) throws ClassNotFoundException, SQLException {
+	public void addSpotNumber(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "UPDATE Parking_Spots SET address = ? WHERE location_name = ?";
+		String query = "UPDATE Parking_Spots SET spot_number = ? WHERE user_id = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, parkingSpots.getAddress());
-		statement.setString(2, parkingSpots.getLocationName());
+		statement.setString(1, parkingSpots.getSpotNumber());
+		statement.setInt(2, id);
 		statement.executeUpdate();
 	}
 

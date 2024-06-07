@@ -1,34 +1,14 @@
 package com.chainsys.model;
 
-import java.time.LocalDateTime;
-
 public class Reservations {
 	int reservationId;
 	int userId;
-	LocalDateTime startTime;
-	LocalDateTime endTime;
+	String numberPlate;
+	String startDate;
+	String endDate;
+	String startTime;
+	String endTime;
 	String reservationStatus;
-	String paymentStatus;
-
-	public Reservations(int reservationId, int userId, LocalDateTime startTime, LocalDateTime endTime,
-			String reservationStatus, String paymentStatus) {
-		super();
-		this.reservationId = reservationId;
-		this.userId = userId;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.reservationStatus = reservationStatus;
-		this.paymentStatus = paymentStatus;
-	}
-
-	@Override
-	public String toString() {
-		return "Reservations [reservationId=" + reservationId + ", userId=" + userId + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", reservationStatus=" + reservationStatus + ", paymentStatus="
-				+ paymentStatus + ", getReservationId()=" + getReservationId() + ", getUserId()=" + getUserId()
-				+ ", getStartTime()=" + getStartTime() + ", getEndTime()=" + getEndTime() + ", getReservationStatus()="
-				+ getReservationStatus() + ", getPaymentStatus()=" + getPaymentStatus() + "]";
-	}
 
 	public int getReservationId() {
 		return reservationId;
@@ -46,19 +26,43 @@ public class Reservations {
 		this.userId = userId;
 	}
 
-	public LocalDateTime getStartTime() {
+	public String getNumberPlate() {
+		return numberPlate;
+	}
+
+	public void setNumberPlate(String numberPlate) {
+		this.numberPlate = numberPlate;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDateTime getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -68,14 +72,6 @@ public class Reservations {
 
 	public void setReservationStatus(String reservationStatus) {
 		this.reservationStatus = reservationStatus;
-	}
-
-	public String getPaymentStatus() {
-		return paymentStatus;
-	}
-
-	public void setPaymentStatus(String paymentStatus) {
-		this.paymentStatus = paymentStatus;
 	}
 
 }

@@ -24,31 +24,20 @@ public class ReservationServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Handle GET requests here if needed
-		// This method is called when the servlet receives a GET request
-		// For this example, let's just redirect to Reservation.html
 		response.sendRedirect("Reservation.html");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Handle POST requests here
-		// This method is called when the servlet receives a POST request
 
 		String numberPlate = request.getParameter("numberPlate");
 		reservation.setNumberPlate(numberPlate);
-		String startDate = request.getParameter("startDate");
-		reservation.setStartDate(startDate);
-		String endDate = request.getParameter("endDate");
-		reservation.setEndDate(endDate);
-		String startTime = request.getParameter("startTime");
-		reservation.setStartTime(startTime);
-		String endTime = request.getParameter("endTime");
-		reservation.setEndTime(endTime);
-		System.out.println(startDate);
-		System.out.println(endDate);
-		System.out.println(startTime);
-		System.out.println(endTime);
+		String startDateTime = request.getParameter("startDateTime");
+		reservation.setStartDateTime(startDateTime);
+		String endDateTime = request.getParameter("endDateTime");
+		reservation.setEndDateTime(endDateTime);
+		System.out.println(startDateTime);
+		System.out.println(endDateTime);
 
 		HttpSession session = request.getSession(false);
 		RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
@@ -56,12 +45,10 @@ public class ReservationServlet extends HttpServlet {
 		System.out.println(id);
 
 		try {
-			reservationDAO.insertReservation(reservation);
+			reservationDAO.insertReservation(reservation, id);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-
-		// After processing, you may redirect or forward as needed
 		response.sendRedirect("Reservation.html");
 	}
 }

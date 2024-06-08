@@ -1,4 +1,5 @@
 package com.chainsys.servlet;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -78,8 +79,7 @@ public class RegistrationLoginServlet extends HttpServlet {
 
 			case "login":
 				try {
-					if (userName.equals("Angelin") && userPassword.equals("Angelin1")
-							&& phoneNumber.equals("9344868945") && email.equals("angelin@gmail.com")) {
+					if (email.equals("angelin@parkingspot.com") && userPassword.equals("Angelin1")) {
 
 						List<RegistrationLogin> list = registrationLoginImpl.read();
 						request.setAttribute("list", list);
@@ -90,7 +90,7 @@ public class RegistrationLoginServlet extends HttpServlet {
 						if (email.equals(email1)) {
 							RegistrationLogin userId = registrationLoginImpl.getUserById(registrationLogin);
 							System.out.println(userId);
-							
+
 							HttpSession session = request.getSession();
 							System.out.println(userId);
 							session.setAttribute("userId", userId);

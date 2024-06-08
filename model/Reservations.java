@@ -4,10 +4,8 @@ public class Reservations {
 	int reservationId;
 	int userId;
 	String numberPlate;
-	String startDate;
-	String endDate;
-	String startTime;
-	String endTime;
+	String startDateTime;
+	String endDateTime;
 	String reservationStatus;
 
 	public int getReservationId() {
@@ -34,36 +32,20 @@ public class Reservations {
 		this.numberPlate = numberPlate;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public String getStartDateTime() {
+		return startDateTime;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setStartDateTime(String startDateTime) {
+		this.startDateTime = startDateTime;
 	}
 
-	public String getEndDate() {
-		return endDate;
+	public String getEndDateTime() {
+		return endDateTime;
 	}
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
+	public void setEndDateTime(String endDateTime) {
+		this.endDateTime = endDateTime;
 	}
 
 	public String getReservationStatus() {

@@ -121,7 +121,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			}
 			response.sendRedirect("ReservationServlet");
 		} else {
-			//response.sendRedirect("Location.html");
+			response.sendRedirect("Location.html");
 		}
 	}
 }

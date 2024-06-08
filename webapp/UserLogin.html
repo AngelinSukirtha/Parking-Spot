@@ -7,7 +7,7 @@
 <style>
 body {
 	background-color: #000;
-	color: #fff;
+	color: white;
 	background-image:
 		url('https://images.unsplash.com/photo-1517672651691-24622a91b550?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FyJTIwYW5kJTIwYmlrZXxlbnwwfHwwfHx8MA%3D%3D');
 	background-repeat: no-repeat;
@@ -79,14 +79,16 @@ button[type="submit"]:hover {
 	<div class="container">
 		<h2>User Login</h2>
 		<form action="RegistrationLoginServlet" method="post">
-			User Name:<input type="text" id="userName" name="userName"
-				pattern="[A-Z a-z]{5,}" required> Password: <input
-				type="password" id="userPassword" name="userPassword"
-				pattern="[A-z a-z 0-9]{8}" required> Phone Number: <input
+			<!-- User Name:<input type="text" id="userName" name="userName"
+				pattern="[A-Z a-z]{5,}" required>  -->
+			<!-- Phone Number: <input
 				type="text" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
-				required> Email: <input type="email" id="email" name="email"
-				pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,}$" required><input
-				type="hidden" name="action" value="login">
+				required>  -->
+			Email: <input type="email" id="email" name="email"
+				pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,}$" required> Password: <input
+				type="password" id="userPassword" name="userPassword"
+				pattern="[A-z a-z 0-9]{8}" required><input type="hidden"
+				name="action" value="login">
 			<button type="submit">Login</button>
 		</form>
 		<div class="register">

@@ -98,6 +98,15 @@ body {
 	color: black;
 	border-radius: 5px;
 }
+
+.checkbox-cell {
+	display: none;
+}
+
+.checkbox-cell:checked+label.cell, .checkbox-cell:checked+label.cell1,
+	.checkbox-cell:checked+label.cell2 {
+	background-color: rgb(90, 209, 90);
+}
 </style>
 </head>
 <body>
@@ -113,83 +122,189 @@ body {
 			<i class="fas fa-truck"></i>TRUCK
 		</button>
 	</div>
+	<form id="parkingForm" action="ParkingSpotsServlet" method="post">
+		<div class="container">
+			<div class="grid">
+				<input type="checkbox" class="checkbox-cell" id="C01"> <label
+					for="C01" class="cell">C01</label> <input type="checkbox"
+					class="checkbox-cell" id="C02"> <label for="C02"
+					class="cell">C02</label> <input type="checkbox"
+					class="checkbox-cell" id="C03"> <label for="C03"
+					class="cell">C03</label> <input type="checkbox"
+					class="checkbox-cell" id="C04"> <label for="C04"
+					class="cell">C04</label> <input type="checkbox"
+					class="checkbox-cell" id="C05"> <label for="C05"
+					class="cell">C05</label> <input type="checkbox"
+					class="checkbox-cell" id="C06"> <label for="C06"
+					class="cell">C06</label> <input type="checkbox"
+					class="checkbox-cell" id="C07"> <label for="C07"
+					class="cell">C07</label> <input type="checkbox"
+					class="checkbox-cell" id="C08"> <label for="C08"
+					class="cell">C08</label> <input type="checkbox"
+					class="checkbox-cell" id="C09"> <label for="C09"
+					class="cell">C09</label> <input type="checkbox"
+					class="checkbox-cell" id="C10"> <label for="C10"
+					class="cell">C10</label> <input type="checkbox"
+					class="checkbox-cell" id="C11"> <label for="C11"
+					class="cell">C11</label> <input type="checkbox"
+					class="checkbox-cell" id="C12"> <label for="C12"
+					class="cell">C12</label> <input type="checkbox"
+					class="checkbox-cell" id="C13"> <label for="C13"
+					class="cell">C13</label> <input type="checkbox"
+					class="checkbox-cell" id="C14"> <label for="C14"
+					class="cell">C14</label> <input type="checkbox"
+					class="checkbox-cell" id="C15"> <label for="C15"
+					class="cell">C15</label> <input type="checkbox"
+					class="checkbox-cell" id="C16"> <label for="C16"
+					class="cell">C16</label> <input type="checkbox"
+					class="checkbox-cell" id="C17"> <label for="C17"
+					class="cell">C17</label> <input type="checkbox"
+					class="checkbox-cell" id="C18"> <label for="C18"
+					class="cell">C18</label> <input type="checkbox"
+					class="checkbox-cell" id="C19"> <label for="C19"
+					class="cell">C19</label> <input type="checkbox"
+					class="checkbox-cell" id="C20"> <label for="C20"
+					class="cell">C20</label>
+			</div>
 
-	<div class="container">
-		<div class="grid">
-			<div class="cell">C01</div>
-			<div class="cell">C02</div>
-			<div class="cell">C03</div>
-			<div class="cell">C04</div>
-			<div class="cell">C05</div>
-			<div class="cell">C06</div>
-			<div class="cell">C07</div>
-			<div class="cell">C08</div>
-			<div class="cell">C09</div>
-			<div class="cell">C10</div>
-			<div class="cell">C11</div>
-			<div class="cell">C12</div>
-			<div class="cell">C13</div>
-			<div class="cell">C14</div>
-			<div class="cell">C15</div>
-			<div class="cell">C16</div>
-			<div class="cell">C17</div>
-			<div class="cell">C18</div>
-			<div class="cell">C19</div>
-			<div class="cell">C20</div>
-		</div>
+			<div class="grid1">
+				<input type="checkbox" class="checkbox-cell" id="B01"> <label
+					for="B01" class="cell1">B01</label> <input type="checkbox"
+					class="checkbox-cell" id="B02"> <label for="B02"
+					class="cell1">B02</label> <input type="checkbox"
+					class="checkbox-cell" id="B03"> <label for="B03"
+					class="cell1">B03</label> <input type="checkbox"
+					class="checkbox-cell" id="B04"> <label for="B04"
+					class="cell1">B04</label> <input type="checkbox"
+					class="checkbox-cell" id="B05"> <label for="B05"
+					class="cell1">B05</label> <input type="checkbox"
+					class="checkbox-cell" id="B06"> <label for="B06"
+					class="cell1">B06</label> <input type="checkbox"
+					class="checkbox-cell" id="B07"> <label for="B07"
+					class="cell1">B07</label> <input type="checkbox"
+					class="checkbox-cell" id="B08"> <label for="B08"
+					class="cell1">B08</label> <input type="checkbox"
+					class="checkbox-cell" id="B09"> <label for="B09"
+					class="cell1">B09</label> <input type="checkbox"
+					class="checkbox-cell" id="B10"> <label for="B10"
+					class="cell1">B10</label> <input type="checkbox"
+					class="checkbox-cell" id="B11"> <label for="B11"
+					class="cell1">B11</label> <input type="checkbox"
+					class="checkbox-cell" id="B12"> <label for="B12"
+					class="cell1">B12</label> <input type="checkbox"
+					class="checkbox-cell" id="B13"> <label for="B13"
+					class="cell1">B13</label> <input type="checkbox"
+					class="checkbox-cell" id="B14"> <label for="B14"
+					class="cell1">B14</label> <input type="checkbox"
+					class="checkbox-cell" id="B15"> <label for="B15"
+					class="cell1">B15</label> <input type="checkbox"
+					class="checkbox-cell" id="B16"> <label for="B16"
+					class="cell1">B16</label> <input type="checkbox"
+					class="checkbox-cell" id="B17"> <label for="B17"
+					class="cell1">B17</label> <input type="checkbox"
+					class="checkbox-cell" id="B18"> <label for="B18"
+					class="cell1">B18</label> <input type="checkbox"
+					class="checkbox-cell" id="B19"> <label for="B19"
+					class="cell1">B19</label> <input type="checkbox"
+					class="checkbox-cell" id="B20"> <label for="B20"
+					class="cell1">B20</label> <input type="checkbox"
+					class="checkbox-cell" id="B21"> <label for="B21"
+					class="cell1">B21</label> <input type="checkbox"
+					class="checkbox-cell" id="B22"> <label for="B22"
+					class="cell1">B22</label> <input type="checkbox"
+					class="checkbox-cell" id="B23"> <label for="B23"
+					class="cell1">B23</label> <input type="checkbox"
+					class="checkbox-cell" id="B24"> <label for="B24"
+					class="cell1">B24</label> <input type="checkbox"
+					class="checkbox-cell" id="B25"> <label for="B25"
+					class="cell1">B25</label> <input type="checkbox"
+					class="checkbox-cell" id="B26"> <label for="B26"
+					class="cell1">B26</label> <input type="checkbox"
+					class="checkbox-cell" id="B27"> <label for="B27"
+					class="cell1">B27</label> <input type="checkbox"
+					class="checkbox-cell" id="B28"> <label for="B28"
+					class="cell1">B28</label> <input type="checkbox"
+					class="checkbox-cell" id="B29"> <label for="B29"
+					class="cell1">B29</label> <input type="checkbox"
+					class="checkbox-cell" id="B30"> <label for="B30"
+					class="cell1">B30</label> <input type="checkbox"
+					class="checkbox-cell" id="B31"> <label for="B31"
+					class="cell1">B31</label> <input type="checkbox"
+					class="checkbox-cell" id="B32"> <label for="B32"
+					class="cell1">B32</label> <input type="checkbox"
+					class="checkbox-cell" id="B33"> <label for="B33"
+					class="cell1">B33</label>
+			</div>
 
-		<div class="grid1">
-			<div class="cell1">B01</div>
-			<div class="cell1">B02</div>
-			<div class="cell1">B03</div>
-			<div class="cell1">B04</div>
-			<div class="cell1">B05</div>
-			<div class="cell1">B06</div>
-			<div class="cell1">B07</div>
-			<div class="cell1">B08</div>
-			<div class="cell1">B09</div>
-			<div class="cell1">B10</div>
-			<div class="cell1">B11</div>
-			<div class="cell1">B12</div>
-			<div class="cell1">B13</div>
-			<div class="cell1">B14</div>
-			<div class="cell1">B15</div>
-			<div class="cell1">B16</div>
-			<div class="cell1">B17</div>
-			<div class="cell1">B18</div>
-			<div class="cell1">B19</div>
-			<div class="cell1">B20</div>
-			<div class="cell1">B21</div>
-			<div class="cell1">B22</div>
-			<div class="cell1">B23</div>
-			<div class="cell1">B24</div>
-			<div class="cell1">B25</div>
-			<div class="cell1">B26</div>
-			<div class="cell1">B27</div>
-			<div class="cell1">B28</div>
-			<div class="cell1">B29</div>
-			<div class="cell1">B30</div>
-			<div class="cell1">B31</div>
-			<div class="cell1">B32</div>
-			<div class="cell1">B33</div>
+			<div class="grid2">
+				<input type="checkbox" class="checkbox-cell" id="T01"> <label
+					for="T01" class="cell2">T01</label> <input type="checkbox"
+					class="checkbox-cell" id="T02"> <label for="T02"
+					class="cell2">T02</label> <input type="checkbox"
+					class="checkbox-cell" id="T03"> <label for="T03"
+					class="cell2">T03</label> <input type="checkbox"
+					class="checkbox-cell" id="T04"> <label for="T04"
+					class="cell2">T04</label> <input type="checkbox"
+					class="checkbox-cell" id="T05"> <label for="T05"
+					class="cell2">T05</label> <input type="checkbox"
+					class="checkbox-cell" id="T06"> <label for="T06"
+					class="cell2">T06</label> <input type="checkbox"
+					class="checkbox-cell" id="T07"> <label for="T07"
+					class="cell2">T07</label> <input type="checkbox"
+					class="checkbox-cell" id="T08"> <label for="T08"
+					class="cell2">T08</label> <input type="checkbox"
+					class="checkbox-cell" id="T09"> <label for="T09"
+					class="cell2">T09</label> <input type="checkbox"
+					class="checkbox-cell" id="T10"> <label for="T10"
+					class="cell2">T10</label> <input type="checkbox"
+					class="checkbox-cell" id="T11"> <label for="T11"
+					class="cell2">T11</label> <input type="checkbox"
+					class="checkbox-cell" id="T12"> <label for="T12"
+					class="cell2">T12</label> <input type="checkbox"
+					class="checkbox-cell" id="T13"> <label for="T13"
+					class="cell2">T13</label> <input type="checkbox"
+					class="checkbox-cell" id="T14"> <label for="T14"
+					class="cell2">T14</label>
+			</div>
+			<div style="text-align: center; margin-top: 50px;">
+				<button
+					style="padding: 10px 20px; border: none; cursor: pointer; background-color: rgb(253, 220, 54); color: black; border-radius: 5px; margin-bottom: 50px; margin-left: 500px;">
+					Book Now</button>
+			</div>
 		</div>
+	</form>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const checkboxes = document.querySelectorAll('.checkbox-cell');
+			const parkingForm = document.getElementById('parkingForm');
 
-		<div class="grid2">
-			<div class="cell2">T01</div>
-			<div class="cell2">T02</div>
-			<div class="cell2">T03</div>
-			<div class="cell2">T04</div>
-			<div class="cell2">T05</div>
-			<div class="cell2">T06</div>
-			<div class="cell2">T07</div>
-			<div class="cell2">T08</div>
-			<div class="cell2">T09</div>
-			<div class="cell2">T10</div>
-			<div class="cell2">T11</div>
-			<div class="cell2">T12</div>
-			<div class="cell2">T13</div>
-			<div class="cell2">T14</div>
-		</div>
-	</div>
+			parkingForm.addEventListener('submit', function(event) {
+				event.preventDefault();
+
+				let selectedCells = [];
+				checkboxes.forEach(function(checkbox) {
+					if (checkbox.checked) {
+						selectedCells.push(checkbox.id);
+					}
+				});
+
+				const existingHiddenInputs = parkingForm
+						.querySelectorAll('input[type="hidden"]');
+				existingHiddenInputs.forEach(function(input) {
+					input.remove();
+				});
+
+				selectedCells.forEach(function(cellId) {
+					const hiddenInput = document.createElement('input');
+					hiddenInput.type = 'hidden';
+					hiddenInput.name = 'selectedCells[]';
+					hiddenInput.value = cellId;
+					parkingForm.appendChild(hiddenInput);
+				});
+
+				parkingForm.submit();
+			});
+		});
+	</script>
 </body>
 </html>

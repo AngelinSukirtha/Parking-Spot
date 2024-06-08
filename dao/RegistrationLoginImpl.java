@@ -98,7 +98,6 @@ public class RegistrationLoginImpl implements RegistrationLoginDAO {
 			System.out.println(rows + " rows updated");
 		}
 	}
-	
 
 	public RegistrationLogin getUserById(RegistrationLogin registrationLogin)
 			throws ClassNotFoundException, SQLException {

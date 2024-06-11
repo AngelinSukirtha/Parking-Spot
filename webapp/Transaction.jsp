@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Transactions</title>
 <style>
@@ -72,7 +72,7 @@ input[type="datetime-local"] {
 				<th>Price</th>
 				<th>Payment Method</th>
 				<th>Transaction Time</th>
-				<th>Payment Status</th>
+				<th>Payment Checkout</th>
 			</tr>
 			<%
 			RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
@@ -80,14 +80,12 @@ input[type="datetime-local"] {
 			%>
 			<tr>
 				<td><%=registrationLogin.getUserId()%></td>
-				<td><%=transaction.getPrice()%></td>
-				<td><select>
+				<td><%=request.getAttribute("price")%></td>
+				<td><select name="paymentMethod">
 						<option value="Credit Card">Credit Card</option>
 						<option value="Debit Card">Debit Card</option>
-						<option value="Net Banking">Net Banking</option>
-						<option value="PayPal">PayPal</option>
 				</select></td>
-				<td><%=transaction.getTransactionTime()%></td>
+				<td><%=request.getAttribute("transactionTime")%></td>
 				<td><button class="view-button">Pay</button></td>
 			</tr>
 			<%

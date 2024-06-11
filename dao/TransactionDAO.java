@@ -59,16 +59,28 @@ public class TransactionDAO {
 
 	public Transactions readTransactions(Transactions transaction, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "SELECT * FROM Transactions WHERE user_id=?";
+		String query = "SELECT price, transaction_time FROM Transactions WHERE user_id=?";
 		PreparedStatement p = connection.prepareStatement(query);
 		p.setInt(1, id);
 		ResultSet rows = p.executeQuery();
 		if (rows.next()) {
-			transaction.setPrice(rows.getInt("price"));
-			transaction.setTransactionTime(rows.getString("transaction_time"));
-			return transaction;
+			int price = rows.getInt("price");
+			String time = rows.getString("transaction_time");
+			transaction.setPrice(price);
+			transaction.setTransactionTime(time);
+			System.out.println(price);
+			System.out.println(time);
 		}
-		return null;
+		return transaction;
+	}
+
+	public void addPaymentMethod(int id, String paymentMethod) throws ClassNotFoundException, SQLException {
+		Connection connection = MySQLConnection.getConnection();
+		String query = "UPDATE Transactions SET payment_method = ?, payment_status='paid' WHERE user_id = ?";
+		PreparedStatement statement = connection.prepareStatement(query);
+		statement.setString(1, paymentMethod);
+		statement.setInt(2, id);
+		statement.executeUpdate();
 	}
 
 }

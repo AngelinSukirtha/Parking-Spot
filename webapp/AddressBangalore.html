@@ -61,7 +61,7 @@ label {
 </head>
 <body>
 	<div class="container">
-		<form action="ParkingSpotsServlet" method="get">
+		<form action="ParkingSpotsServlet" method="post">
 			<h2>Select Address</h2>
 			<table>
 				<thead>
@@ -71,27 +71,21 @@ label {
 				</thead>
 				<tbody>
 					<tr>
-						<form action="ParkingSpotsServlet" method="post">
-							<td>Jayanagar<input type="hidden" name="address"
-								value="Jayanagar">
-								<button class="select-button">Select</button>
-							</td>
-						</form>
+						<td>Jayanagar<input type="hidden" name="address"
+							value="Jayanagar">
+							<button class="select-button">Select</button>
+						</td>
 					</tr>
 					<tr>
-						<form action="ParkingSpotsServlet" method="post">
-							<td>Whitefield<input type="hidden" name="address"
-								value="Whitefield">
-								<button class="select-button">Select</button>
-							</td>
-						</form>
+						<td>Whitefield<input type="hidden" name="address"
+							value="Whitefield">
+							<button class="select-button">Select</button>
+						</td>
 					</tr>
 					<tr>
-						<form action="ParkingSpotsServlet" method="post">
-							<td>Domlur<input type="hidden" name="address" value="Domlur">
-								<button class="select-button">Select</button>
-							</td>
-						</form>
+						<td>Domlur<input type="hidden" name="address" value="Domlur">
+							<button class="select-button">Select</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>

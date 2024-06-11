@@ -35,11 +35,11 @@ public class ParkingSpotsDAO {
 		statement.executeUpdate();
 	}
 
-	public void addSpotNumber(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
+	public void addSpotNumber(int id, String spotNumber) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "UPDATE Parking_Spots SET spot_number = ? , spot_status='occupied' WHERE user_id = ?";
+		String query = "UPDATE Parking_Spots SET spot_number = ?, spot_status='occupied' WHERE user_id = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, parkingSpots.getSpotNumber());
+		statement.setString(1, spotNumber);
 		statement.setInt(2, id);
 		statement.executeUpdate();
 	}

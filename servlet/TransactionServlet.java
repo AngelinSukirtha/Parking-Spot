@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.chainsys.dao.*;
-import com.chainsys.model.*;
+import com.chainsys.dao.TransactionDAO;
+import com.chainsys.model.RegistrationLogin;
+import com.chainsys.model.Transactions;
 
 /**
  * Servlet implementation class TransactionServlet
  */
-@WebServlet(urlPatterns = "/TransactionServlet")
+@WebServlet("/TransactionServlet")
 public class TransactionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Transactions transaction = new Transactions();
-	Reservations reservation = new Reservations();
 	TransactionDAO transactionDAO = new TransactionDAO();
+	RegistrationLogin registrationLogin = new RegistrationLogin();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,33 +39,6 @@ public class TransactionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("hii");
-
-		String startDateTime = request.getParameter("startDateTime");
-		reservation.setStartDateTime(startDateTime);
-		String endDateTime = request.getParameter("endDateTime");
-		reservation.setEndDateTime(endDateTime);
-
-		int price = Integer.parseInt(request.getParameter("price"));
-		transaction.setPrice(price);
-		String paymentMethod = request.getParameter("paymentMethod");
-		transaction.setPaymentMethod(paymentMethod);
-		String transactionTime = request.getParameter("transactionTime");
-		transaction.setTransactionTime(transactionTime);
-		String paymentStatus = request.getParameter("paymentStatus");
-		transaction.setPaymentStatus(paymentStatus);
-
-		HttpSession session = request.getSession(false);
-		RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
-		int id = registrationLogin.getUserId();
-		System.out.println(id);
-
-		try {
-			transactionDAO.insertTransaction(reservation, transaction, id);
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		request.getRequestDispatcher("Transaction.jsp").forward(request, response);
 	}
 
 	/**
@@ -73,35 +47,49 @@ public class TransactionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);
-//		System.out.println("hii");
-//
-//		String startDateTime = request.getParameter("startDateTime");
-//		reservation.setStartDateTime(startDateTime);
-//		String endDateTime = request.getParameter("endDateTime");
-//		reservation.setEndDateTime(endDateTime);
-//
-//		int price = Integer.parseInt(request.getParameter("price"));
-//		transaction.setPrice(price);
-//		String paymentMethod = request.getParameter("paymentMethod");
-//		transaction.setPaymentMethod(paymentMethod);
-//		String transactionTime = request.getParameter("transactionTime");
-//		transaction.setTransactionTime(transactionTime);
-//		String paymentStatus = request.getParameter("paymentStatus");
-//		transaction.setPaymentStatus(paymentStatus);
-//
-//		HttpSession session = request.getSession(false);
-//		RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
-//		int id = registrationLogin.getUserId();
-//		System.out.println(id);
-//
-//		try {
-//			transactionDAO.insertTransaction(reservation, id);
-//		} catch (ClassNotFoundException | SQLException e) {
-//			e.printStackTrace();
-//		}
-//		request.getRequestDispatcher("Transaction.jsp").forward(request, response);
+		String paymentMethod = request.getParameter("paymentMethod");
+		transaction.setPaymentMethod(paymentMethod);
+		System.out.println(paymentMethod);
+
+		HttpSession session = request.getSession(false);
+		RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
+		int id = registrationLogin.getUserId();
+		System.out.println(id);
+
+		try {
+			transactionDAO.addPaymentMethod(id, paymentMethod);
+			transactionDAO.readTransactions(transaction, id);
+			String userName = registrationLogin.getUserName();
+			String phoneNumber = registrationLogin.getPhoneNumber();
+			String email = registrationLogin.getEmail();
+			int price = transaction.getPrice();
+			String transactionTime = transaction.getTransactionTime();
+
+			System.out.println(userName);
+			System.out.println(phoneNumber);
+			System.out.println(email);
+			System.out.println(price);
+			System.out.println(transactionTime);
+
+			registrationLogin.setUserName(userName);
+			registrationLogin.setPhoneNumber(phoneNumber);
+			registrationLogin.setEmail(email);
+			transaction.setPrice(price);
+			transaction.setTransactionTime(transactionTime);
+
+			request.setAttribute("userName", userName);
+			request.setAttribute("phoneNumber", phoneNumber);
+			request.setAttribute("email", email);
+			request.setAttribute("price", price);
+			request.setAttribute("transactionTime", transactionTime);
+
+			request.getRequestDispatcher("TransactionConfirmation.jsp").forward(request, response);
+
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			response.sendRedirect("Transaction.jsp");
+		}
+
 	}
 
 }

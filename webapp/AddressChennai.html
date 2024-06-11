@@ -61,40 +61,35 @@ label {
 </head>
 <body>
 	<div class="container">
-		<h2>Select Address</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Address</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<form action="ParkingSpotsServlet" method="post">
+		<form action="ParkingSpotsServlet" method="post">
+			<h2>Select Address</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Address</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
 						<td>Mylapore<input type="hidden" name="address"
 							value="Mylapore">
 							<button class="select-button">Select</button>
 						</td>
-					</form>
-				</tr>
-				<tr>
-					<form action="ParkingSpotsServlet" method="post">
+					</tr>
+					<tr>
 						<td>Velachery<input type="hidden" name="address"
 							value="Velachery">
 							<button class="select-button">Select</button>
 						</td>
-					</form>
-				</tr>
-				<tr>
-					<form action="ParkingSpotsServlet" method="post">
+					</tr>
+					<tr>
 						<td>Perungudi<input type="hidden" name="address"
 							value="Perungudi">
 							<button class="select-button">Select</button>
 						</td>
-					</form>
-				</tr>
-			</tbody>
-		</table>
+					</tr>
+				</tbody>
+			</table>
 		</form>
 	</div>
 </body>

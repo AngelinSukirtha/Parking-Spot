@@ -51,12 +51,22 @@ public class ReservationServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+
 		try {
 			transactionDAO.insertTransaction(reservation, transaction, id);
 			transactionDAO.readTransactions(transaction, id);
+			int price = transaction.getPrice();
+			String transactionTime = transaction.getTransactionTime();
+			System.out.println(price);
+			System.out.println(transactionTime);
+			transaction.setPrice(price);
+			transaction.setTransactionTime(transactionTime);
+			request.setAttribute("price", price);
+			request.setAttribute("transactionTime", transactionTime);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		request.getRequestDispatcher("Transaction.jsp").forward(request, response);
 	}
+
 }

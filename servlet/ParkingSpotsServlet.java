@@ -34,15 +34,21 @@ public class ParkingSpotsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}	 *      response)
+	 *      protected void doGet(HttpServletRequest request, HttpServletResponse
+	 *      response) throws ServletException, IOException {
+	 * 
+	 *      } * response)
 	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -90,17 +96,18 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 				case "Mylapore":
 				case "Velachery":
 				case "Perungudi":
-				case "Alanganallur":
+				case "Alanganallur": 
 				case "Kalavasal":
-				case "Peraiyur":
+				case "Periyar":
 				case "Jayanagar":
 				case "Whitefield":
 				case "Domlur":
 					parkingSpotsDAO.addAddress(parkingSpots, id);
-					request.getRequestDispatcher("Spots.html").forward(request, response);
+					request.getRequestDispatcher("Spots.jsp").forward(request, response);
 					break;
 				default:
 					System.out.println("Invalid address");
+					response.sendRedirect("Location.html");
 					break;
 				}
 			} catch (ClassNotFoundException | SQLException e) {
@@ -108,13 +115,12 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			}
 		}
 
-		String[] selectedLocations = request.getParameterValues("selectedCells[]");
+		String[] selectedSpots = request.getParameterValues("selectedSpots");
 
-		if (selectedLocations != null && selectedLocations.length > 0) {
-			for (String spotNumber : selectedLocations) {
+		if (selectedSpots != null && selectedSpots.length > 0) {
+			for (String spotNumber : selectedSpots) {
 				try {
-					parkingSpots.setSpotNumber(spotNumber);
-					parkingSpotsDAO.addSpotNumber(parkingSpots, id);
+					parkingSpotsDAO.addSpotNumber(id, spotNumber);
 				} catch (ClassNotFoundException | SQLException e) {
 					e.printStackTrace();
 				}

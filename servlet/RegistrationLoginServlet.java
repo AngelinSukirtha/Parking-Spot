@@ -2,7 +2,6 @@ package com.chainsys.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -80,11 +79,13 @@ public class RegistrationLoginServlet extends HttpServlet {
 			case "login":
 				try {
 					if (email.equals("angelin@parkingspot.com") && userPassword.equals("Angelin1")) {
-
-						List<RegistrationLogin> list = registrationLoginImpl.read();
-						request.setAttribute("list", list);
-						RequestDispatcher dispatcher = request.getRequestDispatcher("ParkingSpot.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("Admin.jsp");
 						dispatcher.forward(request, response);
+
+//						List<RegistrationLogin> list = registrationLoginImpl.read();
+//						request.setAttribute("list", list);
+//						RequestDispatcher dispatcher1 = request.getRequestDispatcher("ParkingSpot.jsp");
+//						dispatcher1.forward(request, response);
 					} else {
 						String email1 = registrationLoginImpl.userLogin(registrationLogin);
 						if (email.equals(email1)) {

@@ -16,7 +16,9 @@ import com.chainsys.dao.*;
 public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Reservations reservation = new Reservations();
+	Transactions transaction = new Transactions();
 	ReservationDAO reservationDAO = new ReservationDAO();
+	TransactionDAO transactionDAO = new TransactionDAO();
 
 	public ReservationServlet() {
 		super();
@@ -49,6 +51,12 @@ public class ReservationServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("Reservation.html");
+		try {
+			transactionDAO.insertTransaction(reservation, transaction, id);
+			transactionDAO.readTransactions(transaction, id);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("Transaction.jsp").forward(request, response);
 	}
 }

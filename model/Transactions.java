@@ -1,55 +1,51 @@
 package com.chainsys.model;
 
-import java.time.LocalDateTime;
-
 public class Transactions {
-	int transactionId;
-	int reservationId;
-	int amount;
+	int userId;
+	int price;
 	String paymentMethod;
-	LocalDateTime transactionTime;
+	String transactionTime;
+	String paymentStatus;
 
-	public Transactions(int transactionId, int reservationId, int amount, String paymentMethod,
-			LocalDateTime transactionTime) {
+	public Transactions(int userId, int price, String paymentMethod, String transactionTime, String paymentStatus) {
 		super();
-		this.transactionId = transactionId;
-		this.reservationId = reservationId;
-		this.amount = amount;
+		this.userId = userId;
+		this.price = price;
 		this.paymentMethod = paymentMethod;
 		this.transactionTime = transactionTime;
+		this.paymentStatus = paymentStatus;
+	}
+
+	public Transactions() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Transactions(int price2, String transaction_time) {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String toString() {
-		return "Transactions [transactionId=" + transactionId + ", reservationId=" + reservationId + ", amount="
-				+ amount + ", paymentMethod=" + paymentMethod + ", transactionTime=" + transactionTime
-				+ ", getTransactionId()=" + getTransactionId() + ", getReservationId()=" + getReservationId()
-				+ ", getAmount()=" + getAmount() + ", getPaymentMethod()=" + getPaymentMethod()
-				+ ", getTransactionTime()=" + getTransactionTime() + "]";
+		return "Transactions [userId=" + userId + ", price=" + price + ", paymentMethod=" + paymentMethod
+				+ ", transactionTime=" + transactionTime + ", paymentStatus=" + paymentStatus + ", getUserId()="
+				+ getUserId() + ", getPrice()=" + getPrice() + ", getPaymentMethod()=" + getPaymentMethod()
+				+ ", getTransactionTime()=" + getTransactionTime() + ", getPaymentStatus()=" + getPaymentStatus() + "]";
 	}
 
-	public int getTransactionId() {
-		return transactionId;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setTransactionId(int transactionId) {
-		this.transactionId = transactionId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public int getReservationId() {
-		return reservationId;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setReservationId(int reservationId) {
-		this.reservationId = reservationId;
-	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public String getPaymentMethod() {
@@ -60,12 +56,20 @@ public class Transactions {
 		this.paymentMethod = paymentMethod;
 	}
 
-	public LocalDateTime getTransactionTime() {
+	public String getTransactionTime() {
 		return transactionTime;
 	}
 
-	public void setTransactionTime(LocalDateTime transactionTime) {
+	public void setTransactionTime(String transactionTime) {
 		this.transactionTime = transactionTime;
+	}
+
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 
 }

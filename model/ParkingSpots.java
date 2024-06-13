@@ -5,16 +5,18 @@ public class ParkingSpots {
 	int locationId;
 	String locationName;
 	String address;
+	String vehicleType;
 	String spotNumber;
 	String spotStatus;
 
-	public ParkingSpots(int userId, int locationId, String locationName, String address, String spotNumber,
-			String spotStatus) {
+	public ParkingSpots(int userId, int locationId, String locationName, String address, String vehicleType,
+			String spotNumber, String spotStatus) {
 		super();
 		UserId = userId;
 		this.locationId = locationId;
 		this.locationName = locationName;
 		this.address = address;
+		this.vehicleType = vehicleType;
 		this.spotNumber = spotNumber;
 		this.spotStatus = spotStatus;
 	}
@@ -22,10 +24,11 @@ public class ParkingSpots {
 	@Override
 	public String toString() {
 		return "ParkingSpots [UserId=" + UserId + ", locationId=" + locationId + ", locationName=" + locationName
-				+ ", address=" + address + ", spotNumber=" + spotNumber + ", spotStatus=" + spotStatus
-				+ ", getUserId()=" + getUserId() + ", getLocationId()=" + getLocationId() + ", getLocationName()="
-				+ getLocationName() + ", getAddress()=" + getAddress() + ", getSpotNumber()=" + getSpotNumber()
-				+ ", getSpotStatus()=" + getSpotStatus() + "]";
+				+ ", address=" + address + ", vehicleType=" + vehicleType + ", spotNumber=" + spotNumber
+				+ ", spotStatus=" + spotStatus + ", getUserId()=" + getUserId() + ", getLocationId()=" + getLocationId()
+				+ ", getLocationName()=" + getLocationName() + ", getAddress()=" + getAddress() + ", getVehicleType()="
+				+ getVehicleType() + ", getSpotNumber()=" + getSpotNumber() + ", getSpotStatus()=" + getSpotStatus()
+				+ "]";
 	}
 
 	public int getUserId() {
@@ -58,6 +61,14 @@ public class ParkingSpots {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
 	}
 
 	public String getSpotNumber() {

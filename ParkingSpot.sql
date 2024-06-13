@@ -4,7 +4,7 @@ use parking_spot_database;
 drop database parking_spot_database;
 
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
     user_name VARCHAR(50),
     user_password VARCHAR(50),
     phone_number VARCHAR(50),
@@ -20,9 +20,9 @@ drop table Users;
 
 CREATE TABLE Parking_Spots (
     user_id  INT,
-    location_id INT PRIMARY KEY AUTO_INCREMENT,
     location_name VARCHAR(100) NOT NULL,
     address VARCHAR(255) NOT NULL,
+    vehicle_type VARCHAR(50) NOT NULL,
     spot_number VARCHAR(50) NOT NULL,
     spot_status VARCHAR(50) NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES Users(user_id));
@@ -49,4 +49,5 @@ CREATE TABLE Transactions (
     payment_status VARCHAR(50) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id));    
 select * from Transactions;
+
 drop table Transactions;

@@ -61,36 +61,39 @@ label {
 </head>
 <body>
 	<div class="container">
-		<form action="ParkingSpotsServlet" method="post">
-			<h2>Select Address</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>Address</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Alanganallur<input type="hidden" name="address"
-							value="Alanganallur">
-							<button class="select-button">Select</button>
-						</td>
-					</tr>
-					<tr>
-						<td>Kalavasal<input type="hidden" name="address"
-							value="Kalavasal">
-							<button class="select-button">Select</button>
-						</td>
-					</tr>
-					<tr>
-						<td>Periyar<input type="hidden" name="address"
-							value="Periyar">
-							<button class="select-button">Select</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
+		<h2>Select Address</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Address</th>
+				</tr>
+			</thead>
+			<tbody>
+				<form action="ParkingSpotsServlet" method="post">
+				<tr>
+					<td>Alanganallur<input type="hidden" name="address"
+						value="Alanganallur">
+						<button class="select-button">Select</button>
+					</td>
+				</tr>
+				</form>
+				<form action="ParkingSpotsServlet" method="post">
+				<tr>
+					<td>Kalavasal<input type="hidden" name="address"
+						value="Kalavasal">
+						<button class="select-button">Select</button>
+					</td>
+				</tr>
+				</form>
+				<form action="ParkingSpotsServlet" method="post">
+				<tr>
+					<td>Periyar<input type="hidden" name="address" value="Periyar">
+						<button class="select-button">Select</button>
+					</td>
+				</tr>
+				</form>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

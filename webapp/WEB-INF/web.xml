@@ -14,10 +14,10 @@
 		<welcome-file>AddressMadurai.html</welcome-file>
 		<welcome-file>AddressBangalore.html</welcome-file>
 		<welcome-file>ParkingSpot.html</welcome-file>
+		<welcome-file>Spots.html</welcome-file>
+		<welcome-file>Reservation.html</welcome-file>
+		<welcome-file>Transaction.html</welcome-file>
 		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		
+
 	</welcome-file-list>
 </web-app>

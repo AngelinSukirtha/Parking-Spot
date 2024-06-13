@@ -16,14 +16,6 @@ public class Transactions {
 		this.paymentStatus = paymentStatus;
 	}
 
-	public Transactions() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Transactions(int price2, String transaction_time) {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
 		return "Transactions [userId=" + userId + ", price=" + price + ", paymentMethod=" + paymentMethod
@@ -70,6 +62,10 @@ public class Transactions {
 
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
+	}
+
+	public Transactions() {
+		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -10,20 +10,11 @@ public class ParkingSpotsDAO {
 
 	public void addLocationName(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "INSERT INTO Parking_Spots (user_id, location_name, address, spot_number, spot_status) VALUES (?, ?, '', 0, '')";
+		String query = "INSERT INTO Parking_Spots (user_id, location_name, address, vehicle_type, spot_number, spot_status) VALUES (?, ?, '', '', 0, '')";
 		PreparedStatement statement = connection.prepareStatement(query);
 		statement.setInt(1, id);
 		statement.setString(2, parkingSpots.getLocationName());
 		statement.execute();
-	}
-
-	public void updateSpotStatus(int locationId, String spotStatus) throws SQLException, ClassNotFoundException {
-		Connection connection = MySQLConnection.getConnection();
-		String query = "UPDATE Parking_Spots SET spot_status = ? WHERE location_id = ?";
-		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, spotStatus);
-		statement.setInt(2, locationId);
-		statement.executeUpdate();
 	}
 
 	public void addAddress(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
@@ -35,12 +26,14 @@ public class ParkingSpotsDAO {
 		statement.executeUpdate();
 	}
 
-	public void addSpotNumber(int id, String spotNumber) throws ClassNotFoundException, SQLException {
+	public void addSpotNumber(int id, String vehicleType, String spotNumber)
+			throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "UPDATE Parking_Spots SET spot_number = ?, spot_status='occupied' WHERE user_id = ?";
+		String query = "UPDATE Parking_Spots SET vehicle_type=?, spot_number = ?, spot_status='occupied' WHERE user_id = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, spotNumber);
-		statement.setInt(2, id);
+		statement.setString(1, vehicleType);
+		statement.setString(2, spotNumber);
+		statement.setInt(3, id);
 		statement.executeUpdate();
 	}
 

@@ -114,17 +114,21 @@ body {
 <body>
 
 	<div class="vehicle-buttons">
-		<button class="vehicle-button" style="margin-left: 140px;">
+		<button class="vehicle-button" style="margin-left: 140px;"
+			onclick="setVehicleType('Car')">
 			<i class="fas fa-car"></i>CAR
 		</button>
-		<button class="vehicle-button" style="margin-right: 70px;">
+		<button class="vehicle-button" style="margin-right: 70px;"
+			onclick="setVehicleType('Bike')">
 			<i class="fas fa-bicycle"></i>BIKE
 		</button>
-		<button class="vehicle-button" style="margin-right: 160px;">
+		<button class="vehicle-button" style="margin-right: 160px;"
+			onclick="setVehicleType('Truck')">
 			<i class="fas fa-truck"></i>TRUCK
 		</button>
 	</div>
 	<form id="parkingForm" action="ParkingSpotsServlet" method="post">
+		<input type="hidden" name="vehicleType" id="vehicleTypeInput">
 		<div class="container">
 			<div class="grid">
 				<%
@@ -165,18 +169,30 @@ body {
 			</div>
 		</div>
 	</form>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			const checkboxes = document.querySelectorAll('.checkbox-cell');
-			const parkingForm = document.getElementById('parkingForm');
+		$(document).ready(function() {
+			const checkboxes = $('.checkbox-cell');
+			const parkingForm = $('#parkingForm');
 
-			parkingForm.addEventListener('submit', function(event) {
+			parkingForm.on('submit', function(event) {
 				event.preventDefault();
 
 				let selectedCells = [];
-				checkboxes.forEach(function(checkbox) {
-					if (checkbox.checked) {
-						selectedCells.push(checkbox.id);
+				let vehicleType = '';
+
+				checkboxes.each(function() {
+					if ($(this).prop('checked')) {
+						selectedCells.push($(this).attr('id'));
+
+						if ($(this).attr('id').startsWith('C')) {
+							vehicleType = 'Car';
+						} else if ($(this).attr('id').startsWith('B')) {
+							vehicleType = 'Bike';
+						} else if ($(this).attr('id').startsWith('T')) {
+							vehicleType = 'Truck';
+						}
 					}
 				});
 
@@ -185,15 +201,20 @@ body {
 					return;
 				}
 
-				const selectedSpotsInput = document.createElement('input');
-				selectedSpotsInput.type = 'hidden';
-				selectedSpotsInput.name = 'selectedSpots';
-				selectedSpotsInput.value = JSON.stringify(selectedCells);
-				parkingForm.appendChild(selectedSpotsInput);
+				$('#vehicleTypeInput').val(vehicleType);
 
-				parkingForm.submit();
+				$('<input>').attr({
+					type : 'hidden',
+					name : 'selectedSpots',
+					value : JSON.stringify(selectedCells)
+				}).appendTo(parkingForm);
+
+				console.log(vehicleType);
+
+				parkingForm.get(0).submit();
 			});
 		});
 	</script>
+
 </body>
 </html>

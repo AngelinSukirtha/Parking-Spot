@@ -59,24 +59,36 @@ body {
 	<div class="container">
 		<div class="card">
 			<form action="AdminServlet" method="post">
+				<input type="hidden" name="action" value="userManagement">
 				<div class="card-header">User Management</div>
 				<a href="ParkingSpot.jsp"><button class="button">Manage</button></a>
 			</form>
 		</div>
 
 		<div class="card">
-			<div class="card-header">Parking Spot Management</div>
-			<button class="button">Manage</button>
+			<form action="AdminServlet" method="post">
+				<input type="hidden" name="action" value="parkingSpotManagement">
+				<div class="card-header">Parking Spot Management</div>
+				<a href="ParkingSpotManagement.jsp"><button class="button">Manage</button></a>
+			</form>
 		</div>
 
 		<div class="card">
-			<div class="card-header">Reservation Management</div>
-			<button class="button">Approve Reservation</button>
+			<form action="AdminServlet" method="post">
+				<input type="hidden" name="action" value="reservationManagement">
+				<div class="card-header">Reservation Management</div>
+				<a href="ReservationApproval.jsp"><button class="button">Approve
+						Reservation</button></a>
+			</form>
 		</div>
 
 		<div class="card">
-			<div class="card-header">Transaction Management</div>
-			<button class="button">Refund Transaction</button>
+			<form action="AdminServlet" method="post">
+				<input type="hidden" name="action" value="transactionManagement">
+				<div class="card-header">Transaction Management</div>
+				<a href="TransactionManagement.jsp"><button class="button">Refund
+						Transaction</button></a>
+			</form>
 		</div>
 	</div>
 </body>

@@ -7,13 +7,15 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.chainsys.model.*;
 import com.chainsys.util.MySQLConnection;
 
 public class TransactionDAO {
 
-	public void insertTransaction(Reservations reservation, String vehicleType, int id)
+	public void insertTransaction(Reservations reservation, ParkingSpots parkingSpots, int id)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "INSERT INTO Transactions (user_id, price, payment_method, transaction_time, payment_status) VALUES (?, ?, '', ?, '')";
@@ -24,7 +26,7 @@ public class TransactionDAO {
 		int price = 0;
 
 		if (start != null && end != null) {
-			price = calculatePrice(vehicleType, start, end);
+			price = calculatePrice(parkingSpots.getVehicleType(), start, end);
 			System.out.println("Calculated price: " + price);
 		}
 
@@ -96,6 +98,28 @@ public class TransactionDAO {
 		statement.setString(1, paymentMethod);
 		statement.setInt(2, id);
 		statement.executeUpdate();
+	}
+
+	public List<Transactions> readTransactions() throws ClassNotFoundException, SQLException {
+		List<Transactions> list = new ArrayList<>();
+		Connection connection = MySQLConnection.getConnection();
+		String read = "SELECT * FROM Transactions";
+		PreparedStatement p = connection.prepareStatement(read);
+		try {
+			System.out.println(p);
+			ResultSet rows = p.executeQuery();
+			while (rows.next()) {
+				int userId = rows.getInt("user_id");
+				int price = rows.getInt("price");
+				String paymentMethod = rows.getString("payment_method");
+				String transactionTime = rows.getString("transaction_time");
+				String paymentStatus = rows.getString("payment_status");
+				list.add(new Transactions(userId, price, paymentMethod, transactionTime, paymentStatus));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

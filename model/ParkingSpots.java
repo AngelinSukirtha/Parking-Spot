@@ -2,18 +2,16 @@ package com.chainsys.model;
 
 public class ParkingSpots {
 	int UserId;
-	int locationId;
 	String locationName;
 	String address;
 	String vehicleType;
 	String spotNumber;
 	String spotStatus;
 
-	public ParkingSpots(int userId, int locationId, String locationName, String address, String vehicleType,
-			String spotNumber, String spotStatus) {
+	public ParkingSpots(int userId, String locationName, String address, String vehicleType, String spotNumber,
+			String spotStatus) {
 		super();
 		UserId = userId;
-		this.locationId = locationId;
 		this.locationName = locationName;
 		this.address = address;
 		this.vehicleType = vehicleType;
@@ -23,12 +21,11 @@ public class ParkingSpots {
 
 	@Override
 	public String toString() {
-		return "ParkingSpots [UserId=" + UserId + ", locationId=" + locationId + ", locationName=" + locationName
-				+ ", address=" + address + ", vehicleType=" + vehicleType + ", spotNumber=" + spotNumber
-				+ ", spotStatus=" + spotStatus + ", getUserId()=" + getUserId() + ", getLocationId()=" + getLocationId()
-				+ ", getLocationName()=" + getLocationName() + ", getAddress()=" + getAddress() + ", getVehicleType()="
-				+ getVehicleType() + ", getSpotNumber()=" + getSpotNumber() + ", getSpotStatus()=" + getSpotStatus()
-				+ "]";
+		return "ParkingSpots [UserId=" + UserId + ", locationName=" + locationName + ", address=" + address
+				+ ", vehicleType=" + vehicleType + ", spotNumber=" + spotNumber + ", spotStatus=" + spotStatus
+				+ ", getUserId()=" + getUserId() + ", getLocationName()=" + getLocationName() + ", getAddress()="
+				+ getAddress() + ", getVehicleType()=" + getVehicleType() + ", getSpotNumber()=" + getSpotNumber()
+				+ ", getSpotStatus()=" + getSpotStatus() + "]";
 	}
 
 	public int getUserId() {
@@ -37,14 +34,6 @@ public class ParkingSpots {
 
 	public void setUserId(int userId) {
 		UserId = userId;
-	}
-
-	public int getLocationId() {
-		return locationId;
-	}
-
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
 	}
 
 	public String getLocationName() {

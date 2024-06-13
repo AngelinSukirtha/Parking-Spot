@@ -61,12 +61,10 @@ public class ParkingSpotsServlet extends HttpServlet {
 		String locationName = request.getParameter("action");
 		String address = request.getParameter("address");
 		String[] selectedSpots = request.getParameterValues("selectedSpots");
-		String vehicleType = request.getParameter("vehicleType");
 
 		HttpSession session = request.getSession(false);
 		RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
 		int id = registrationLogin.getUserId();
-		parkingSpots.setVehicleType(vehicleType);
 
 		try {
 			if (locationName != null) {
@@ -74,16 +72,19 @@ public class ParkingSpotsServlet extends HttpServlet {
 			} else if (address != null) {
 				handleAddress(request, response, id, address);
 			} else if (selectedSpots != null) {
+				String vehicleType = request.getParameter("vehicleType");
+				parkingSpots.setVehicleType(vehicleType);
+				System.out.println("vehicleType in post: " + vehicleType);
 				handleSelectedSpots(request, response, id, selectedSpots, vehicleType);
 			} else {
-				handleReservation(request, response, id, vehicleType);
+				handleReservation(request, response, id, parkingSpots);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void handleLocation(HttpServletRequest request, HttpServletResponse response, int id, String locationName)
+	public void handleLocation(HttpServletRequest request, HttpServletResponse response, int id, String locationName)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		parkingSpots.setLocationName(locationName);
 		System.out.println(locationName);
@@ -107,7 +108,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 		}
 	}
 
-	private void handleAddress(HttpServletRequest request, HttpServletResponse response, int id, String address)
+	public void handleAddress(HttpServletRequest request, HttpServletResponse response, int id, String address)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		parkingSpots.setAddress(address);
 		System.out.println(address);
@@ -132,40 +133,40 @@ public class ParkingSpotsServlet extends HttpServlet {
 		}
 	}
 
-	private void handleSelectedSpots(HttpServletRequest request, HttpServletResponse response, int userId,
+	public void handleSelectedSpots(HttpServletRequest request, HttpServletResponse response, int id,
 			String[] selectedSpots, String vehicleType)
 			throws ServletException, IOException, SQLException, ClassNotFoundException {
 		ParkingSpots parkingSpots = new ParkingSpots();
 		parkingSpots.setVehicleType(vehicleType);
-		System.out.println(vehicleType);
+		System.out.println("vehicleType in handleSelectedSpots:" + vehicleType);
 
 		for (String spotNumber : selectedSpots) {
-			parkingSpotsDAO.addSpotNumber(userId, vehicleType, spotNumber);
+			parkingSpotsDAO.addSpotNumber(id, vehicleType, spotNumber);
 		}
 
 		request.getRequestDispatcher("Reservation.html").forward(request, response);
 	}
 
-	private void handleReservation(HttpServletRequest request, HttpServletResponse response, int id, String vehicleType)
-			throws ServletException, IOException, ClassNotFoundException, SQLException {
+	public void handleReservation(HttpServletRequest request, HttpServletResponse response, int id,
+			ParkingSpots parkingSpots) throws ServletException, IOException, ClassNotFoundException, SQLException {
+
 		String numberPlate = request.getParameter("numberPlate");
 		reservation.setNumberPlate(numberPlate);
 		String startDateTime = request.getParameter("startDateTime");
 		reservation.setStartDateTime(startDateTime);
 		String endDateTime = request.getParameter("endDateTime");
 		reservation.setEndDateTime(endDateTime);
+		System.out.println(numberPlate);
 		System.out.println(startDateTime);
 		System.out.println(endDateTime);
 
-		parkingSpots.setVehicleType(vehicleType);
-		System.out.println(vehicleType);
-
 		reservationDAO.insertReservation(reservation, id);
 
-		transactionDAO.insertTransaction(reservation, vehicleType, id);
+		transactionDAO.insertTransaction(reservation, parkingSpots, id);
+		transactionDAO.readTransactions(transaction, id);
 		int price = transaction.getPrice();
 		String transactionTime = transaction.getTransactionTime();
-		System.out.println(price);
+		System.out.println("price " + transaction.getPrice());
 		System.out.println(transactionTime);
 
 		request.setAttribute("price", price);

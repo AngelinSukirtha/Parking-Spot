@@ -4,7 +4,7 @@ use parking_spot_database;
 drop database parking_spot_database;
 
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
     user_name VARCHAR(50),
     user_password VARCHAR(50),
     phone_number VARCHAR(50),
@@ -35,7 +35,7 @@ CREATE TABLE Reservations (
     number_plate VARCHAR(20) NOT NULL,
     start_date_time VARCHAR(100) NOT NULL,
     end_date_time VARCHAR(100) NOT NULL,
-    reservation_status VARCHAR(100) NOT NULL,
+    reservation_status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     FOREIGN KEY (user_id) REFERENCES Users(user_id));
 
 select * from Reservations;
@@ -46,7 +46,7 @@ CREATE TABLE Transactions (
     price INT,
     payment_method VARCHAR(50) NOT NULL,
     transaction_time DATETIME NOT NULL,
-    payment_status VARCHAR(50) NOT NULL,
+    payment_status VARCHAR(50) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id));    
 select * from Transactions;
 

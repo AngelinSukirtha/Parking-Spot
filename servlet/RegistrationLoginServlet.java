@@ -59,7 +59,6 @@ public class RegistrationLoginServlet extends HttpServlet {
 		registrationLogin.setEmail(email);
 
 		String action = request.getParameter("action");
-		System.out.println(action);
 		if (action != null && !action.isEmpty()) {
 			switch (action) {
 			case "register":
@@ -82,18 +81,12 @@ public class RegistrationLoginServlet extends HttpServlet {
 						RequestDispatcher dispatcher = request.getRequestDispatcher("Admin.jsp");
 						dispatcher.forward(request, response);
 
-//						List<RegistrationLogin> list = registrationLoginImpl.read();
-//						request.setAttribute("list", list);
-//						RequestDispatcher dispatcher1 = request.getRequestDispatcher("ParkingSpot.jsp");
-//						dispatcher1.forward(request, response);
 					} else {
 						String email1 = registrationLoginImpl.userLogin(registrationLogin);
 						if (email.equals(email1)) {
 							RegistrationLogin userId = registrationLoginImpl.getUserById(registrationLogin);
-							System.out.println(userId);
 
 							HttpSession session = request.getSession();
-							System.out.println(userId);
 							session.setAttribute("userId", userId);
 
 							request.getRequestDispatcher("Location.html").forward(request, response);
@@ -108,7 +101,7 @@ public class RegistrationLoginServlet extends HttpServlet {
 				break;
 
 			default:
-				System.out.println("Invalid");
+				request.getRequestDispatcher("Index.html").forward(request, response);
 			}
 		}
 

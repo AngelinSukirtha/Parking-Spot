@@ -43,15 +43,15 @@ h1, h2 {
 .btn {
 	display: inline-block;
 	padding: 10px 20px;
-	background-color: #007bff;
-	color: white;
+	background-color: rgb(218, 189, 43);
+	color: black;
 	text-decoration: none;
 	border-radius: 5px;
 	transition: background-color 0.3s;
 }
 
 .btn:hover {
-	background-color: #0056b3;
+	background-color: rgb(196, 169, 34);
 }
 </style>
 </head>
@@ -74,7 +74,7 @@ h1, h2 {
 			</div>
 			<div class="confirmation">
 				<p>
-					Your payment of $.
+					Your payment of Rs.
 					<%=request.getAttribute("price")%>
 					has been processed.
 				</p>

@@ -68,7 +68,7 @@ table {
 	</table>
 	<br>
 	<div style="margin-left: 100px;">
-		<form action="Index.html">
+		<form action="Admin.jsp">
 			<button type="submit"
 				style="border-color: rgb(253, 220, 54); background-color: rgb(253, 220, 54)"
 				title="logout">Logout</button>

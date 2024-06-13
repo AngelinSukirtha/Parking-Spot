@@ -31,8 +31,8 @@ th {
 }
 
 .view-button {
-	background-color: #4CAF50;
-	color: white;
+	background-color: rgb(218, 189, 43);
+	color: black;
 	border: none;
 	border-radius: 4px;
 	padding: 6px 10px;
@@ -43,7 +43,7 @@ th {
 }
 
 .view-button:hover {
-	background-color: #45a049;
+	background-color: rgb(196, 169, 34);
 }
 
 select {

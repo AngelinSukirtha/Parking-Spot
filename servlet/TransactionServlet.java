@@ -65,12 +65,6 @@ public class TransactionServlet extends HttpServlet {
 			int price = transaction.getPrice();
 			String transactionTime = transaction.getTransactionTime();
 
-			System.out.println(userName);
-			System.out.println(phoneNumber);
-			System.out.println(email);
-			System.out.println(price);
-			System.out.println(transactionTime);
-
 			registrationLogin.setUserName(userName);
 			registrationLogin.setPhoneNumber(phoneNumber);
 			registrationLogin.setEmail(email);

@@ -2,7 +2,11 @@ package com.chainsys.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.chainsys.model.*;
 import com.chainsys.util.*;
 
@@ -35,6 +39,29 @@ public class ParkingSpotsDAO {
 		statement.setString(2, spotNumber);
 		statement.setInt(3, id);
 		statement.executeUpdate();
+	}
+
+	public List<ParkingSpots> readParkingSpots() throws ClassNotFoundException, SQLException {
+		List<ParkingSpots> list = new ArrayList<>();
+		Connection connection = MySQLConnection.getConnection();
+		String read = "SELECT * FROM Parking_Spots";
+		PreparedStatement p = connection.prepareStatement(read);
+		try {
+			System.out.println(p);
+			ResultSet rows = p.executeQuery();
+			while (rows.next()) {
+				int userId = rows.getInt("user_id");
+				String locationName = rows.getString("location_name");
+				String address = rows.getString("address");
+				String vehicleType = rows.getString("vehicle_type");
+				String spotNumber = rows.getString("spot_number");
+				String spotStatus = rows.getString("spot_status");
+				list.add(new ParkingSpots(userId, locationName, address, vehicleType, spotNumber, spotStatus));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

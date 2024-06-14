@@ -23,26 +23,24 @@ import com.chainsys.model.*;
 @WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	RegistrationLogin registrationLogin = new RegistrationLogin();
-	RegistrationLoginImpl registrationLoginImpl = new RegistrationLoginImpl();
-	List<RegistrationLogin> list = new ArrayList<RegistrationLogin>();
+	static RegistrationLogin registrationLogin = new RegistrationLogin();
+	static RegistrationLoginImpl registrationLoginImpl = new RegistrationLoginImpl();
+	static List<RegistrationLogin> list = new ArrayList<>();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public UserServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		String email = request.getParameter("delete");
 		registrationLogin.setEmail(email);
 
@@ -64,6 +62,7 @@ public class UserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userName = request.getParameter("userName");

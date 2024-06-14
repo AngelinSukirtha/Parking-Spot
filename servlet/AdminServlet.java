@@ -18,41 +18,33 @@ import com.chainsys.model.*;
 @WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	RegistrationLogin registrationLogin = new RegistrationLogin();
-	Reservations reservation = new Reservations();
-	ParkingSpots parkingSpots = new ParkingSpots();
-	Transactions transactions = new Transactions();
-	RegistrationLoginImpl registrationLoginImpl = new RegistrationLoginImpl();
-	ReservationDAO reservationDAO = new ReservationDAO();
-	ParkingSpotsDAO parkingSpotsDAO = new ParkingSpotsDAO();
-	TransactionDAO transactionDAO = new TransactionDAO();
+	static RegistrationLogin registrationLogin = new RegistrationLogin();
+	static Reservations reservation = new Reservations();
+	static ParkingSpots parkingSpots = new ParkingSpots();
+	static Transactions transactions = new Transactions();
+	static RegistrationLoginImpl registrationLoginImpl = new RegistrationLoginImpl();
+	static ReservationDAO reservationDAO = new ReservationDAO();
+	static ParkingSpotsDAO parkingSpotsDAO = new ParkingSpotsDAO();
+	static TransactionDAO transactionDAO = new TransactionDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public AdminServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// doGet(request, response);
 		String userName = request.getParameter("userName");
 		String userPassword = request.getParameter("userPassword");
 		String phoneNumber = request.getParameter("phoneNumber");
@@ -98,7 +90,8 @@ public class AdminServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("Error");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("Index.html");
+			dispatcher.forward(request, response);
 		}
 
 	}

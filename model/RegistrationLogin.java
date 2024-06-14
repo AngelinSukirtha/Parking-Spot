@@ -65,7 +65,6 @@ public class RegistrationLogin {
 	}
 
 	public RegistrationLogin() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

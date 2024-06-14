@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.chainsys.dao.RegistrationLoginImpl;
+import com.chainsys.dao.*;
 import com.chainsys.model.*;
 
 /**
@@ -19,28 +18,20 @@ import com.chainsys.model.*;
 @WebServlet("/RegistrationLoginServlet")
 public class RegistrationLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	RegistrationLogin registrationLogin = new RegistrationLogin();
-	RegistrationLoginImpl registrationLoginImpl = new RegistrationLoginImpl();
+	static RegistrationLogin registrationLogin = new RegistrationLogin();
+	static RegistrationLoginImpl registrationLoginImpl = new RegistrationLoginImpl();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public RegistrationLoginServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

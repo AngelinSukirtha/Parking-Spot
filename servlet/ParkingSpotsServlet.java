@@ -2,17 +2,13 @@ package com.chainsys.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.chainsys.dao.ParkingSpotsDAO;
-import com.chainsys.dao.ReservationDAO;
-import com.chainsys.dao.TransactionDAO;
+import com.chainsys.dao.*;
 import com.chainsys.model.*;
 
 /**
@@ -21,19 +17,18 @@ import com.chainsys.model.*;
 @WebServlet("/ParkingSpotsServlet")
 public class ParkingSpotsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ParkingSpots parkingSpots = new ParkingSpots();
-	ParkingSpotsDAO parkingSpotsDAO = new ParkingSpotsDAO();
-	Reservations reservation = new Reservations();
-	Transactions transaction = new Transactions();
-	ReservationDAO reservationDAO = new ReservationDAO();
-	TransactionDAO transactionDAO = new TransactionDAO();
+	static ParkingSpots parkingSpots = new ParkingSpots();
+	static ParkingSpotsDAO parkingSpotsDAO = new ParkingSpotsDAO();
+	static Reservations reservation = new Reservations();
+	static Transactions transaction = new Transactions();
+	static ReservationDAO reservationDAO = new ReservationDAO();
+	static TransactionDAO transactionDAO = new TransactionDAO();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ParkingSpotsServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -48,14 +43,8 @@ public class ParkingSpotsServlet extends HttpServlet {
 	 * 
 	 *      } * response)
 	 */
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String locationName = request.getParameter("action");
@@ -74,7 +63,6 @@ public class ParkingSpotsServlet extends HttpServlet {
 			} else if (selectedSpots != null) {
 				String vehicleType = request.getParameter("vehicleType");
 				parkingSpots.setVehicleType(vehicleType);
-				System.out.println("vehicleType in post: " + vehicleType);
 				handleSelectedSpots(request, response, id, selectedSpots, vehicleType);
 			} else {
 				handleReservation(request, response, id, parkingSpots);
@@ -87,7 +75,6 @@ public class ParkingSpotsServlet extends HttpServlet {
 	public void handleLocation(HttpServletRequest request, HttpServletResponse response, int id, String locationName)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		parkingSpots.setLocationName(locationName);
-		System.out.println(locationName);
 
 		switch (locationName) {
 		case "Chennai":
@@ -103,7 +90,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 			request.getRequestDispatcher("AddressBangalore.html").forward(request, response);
 			break;
 		default:
-			System.out.println("Invalid location");
+			request.getRequestDispatcher("Index.html").forward(request, response);
 			break;
 		}
 	}
@@ -111,34 +98,21 @@ public class ParkingSpotsServlet extends HttpServlet {
 	public void handleAddress(HttpServletRequest request, HttpServletResponse response, int id, String address)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		parkingSpots.setAddress(address);
-		System.out.println(address);
 
-		switch (address) {
-		case "Mylapore":
-		case "Velachery":
-		case "Perungudi":
-		case "Alanganallur":
-		case "Kalavasal":
-		case "Periyar":
-		case "Jayanagar":
-		case "Whitefield":
-		case "Domlur":
+		if (address.equals("Mylapore") || address.equals("Velachery") || address.equals("Perungudi")
+				|| address.equals("Alanganallur") || address.equals("Kalavasal") || address.equals("Periyar")
+				|| address.equals("Jayanagar") || address.equals("Whitefield") || address.equals("Domlur")) {
 			parkingSpotsDAO.addAddress(parkingSpots, id);
 			request.getRequestDispatcher("Spots.jsp").forward(request, response);
-			break;
-		default:
-			System.out.println("Invalid address");
+		} else {
 			response.sendRedirect("Location.html");
-			break;
 		}
 	}
 
 	public void handleSelectedSpots(HttpServletRequest request, HttpServletResponse response, int id,
 			String[] selectedSpots, String vehicleType)
 			throws ServletException, IOException, SQLException, ClassNotFoundException {
-		ParkingSpots parkingSpots = new ParkingSpots();
 		parkingSpots.setVehicleType(vehicleType);
-		System.out.println("vehicleType in handleSelectedSpots:" + vehicleType);
 
 		for (String spotNumber : selectedSpots) {
 			parkingSpotsDAO.addSpotNumber(id, vehicleType, spotNumber);
@@ -156,9 +130,6 @@ public class ParkingSpotsServlet extends HttpServlet {
 		reservation.setStartDateTime(startDateTime);
 		String endDateTime = request.getParameter("endDateTime");
 		reservation.setEndDateTime(endDateTime);
-		System.out.println(numberPlate);
-		System.out.println(startDateTime);
-		System.out.println(endDateTime);
 
 		reservationDAO.insertReservation(reservation, id);
 
@@ -166,8 +137,6 @@ public class ParkingSpotsServlet extends HttpServlet {
 		transactionDAO.readTransactions(transaction, id);
 		int price = transaction.getPrice();
 		String transactionTime = transaction.getTransactionTime();
-		System.out.println("price " + transaction.getPrice());
-		System.out.println(transactionTime);
 
 		request.setAttribute("price", price);
 		request.setAttribute("transactionTime", transactionTime);

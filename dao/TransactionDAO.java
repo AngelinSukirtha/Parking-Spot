@@ -20,23 +20,29 @@ public class TransactionDAO {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "INSERT INTO Transactions (user_id, price, payment_method, transaction_time, payment_status) VALUES (?, ?, '', ?, '')";
 		PreparedStatement statement = connection.prepareStatement(query);
+		try {
+			LocalDateTime start = parseDateTime(reservation.getStartDateTime());
+			LocalDateTime end = parseDateTime(reservation.getEndDateTime());
+			int price = 0;
 
-		LocalDateTime start = parseDateTime(reservation.getStartDateTime());
-		LocalDateTime end = parseDateTime(reservation.getEndDateTime());
-		int price = 0;
+			if (start != null && end != null) {
+				price = calculatePrice(parkingSpots.getVehicleType(), start, end);
+			}
 
-		if (start != null && end != null) {
-			price = calculatePrice(parkingSpots.getVehicleType(), start, end);
-			System.out.println("Calculated price: " + price);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String transactionTimeFormatted = LocalDateTime.now().format(formatter);
+
+			statement.setInt(1, id);
+			statement.setInt(2, price);
+			statement.setString(3, transactionTimeFormatted);
+			statement.executeUpdate();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		String transactionTimeFormatted = LocalDateTime.now().format(formatter);
-
-		statement.setInt(1, id);
-		statement.setInt(2, price);
-		statement.setString(3, transactionTimeFormatted);
-		statement.executeUpdate();
 	}
 
 	public LocalDateTime parseDateTime(String dateTimeString) {
@@ -48,45 +54,45 @@ public class TransactionDAO {
 	}
 
 	public int calculatePrice(String vehicleType, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-		if (vehicleType == null || startDateTime == null || endDateTime == null) {
-			return 0;
+		Duration duration = Duration.between(startDateTime, endDateTime);
+		long hours = duration.toHours();
+		int hourlyRate;
+		switch (vehicleType) {
+		case "Car":
+			hourlyRate = 50;
+			break;
+		case "Bike":
+			hourlyRate = 15;
+			break;
+		case "Truck":
+			hourlyRate = 100;
+			break;
+		default:
+			hourlyRate = 50;
+			break;
 		}
-		if (startDateTime != null && endDateTime != null) {
-			Duration duration = Duration.between(startDateTime, endDateTime);
-			long hours = duration.toHours();
-			int hourlyRate;
-			System.out.println("vehicleType: " + vehicleType);
-			switch (vehicleType) {
-			case "Car":
-				hourlyRate = 50;
-				break;
-			case "Bike":
-				hourlyRate = 15;
-				break;
-			case "Truck":
-				hourlyRate = 100;
-				break;
-			default:
-				hourlyRate = 50;
-				break;
-			}
-			return (int) (hours * hourlyRate);
-		} else {
-			return 0;
-		}
+		return (int) (hours * hourlyRate);
 	}
 
 	public Transactions readTransactions(Transactions transaction, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "SELECT price, transaction_time FROM Transactions WHERE user_id=?";
-		PreparedStatement p = connection.prepareStatement(query);
-		p.setInt(1, id);
-		ResultSet rows = p.executeQuery();
-		if (rows.next()) {
-			int price = rows.getInt("price");
-			String time = rows.getString("transaction_time");
-			transaction.setPrice(price);
-			transaction.setTransactionTime(time);
+		PreparedStatement statement = connection.prepareStatement(query);
+		try {
+			statement.setInt(1, id);
+			ResultSet rows = statement.executeQuery();
+			if (rows.next()) {
+				int price = rows.getInt("price");
+				String time = rows.getString("transaction_time");
+				transaction.setPrice(price);
+				transaction.setTransactionTime(time);
+			}
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return transaction;
 	}
@@ -95,19 +101,26 @@ public class TransactionDAO {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "UPDATE Transactions SET payment_method = ?, payment_status='paid' WHERE user_id = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, paymentMethod);
-		statement.setInt(2, id);
-		statement.executeUpdate();
+		try {
+			statement.setString(1, paymentMethod);
+			statement.setInt(2, id);
+			statement.executeUpdate();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public List<Transactions> readTransactions() throws ClassNotFoundException, SQLException {
 		List<Transactions> list = new ArrayList<>();
 		Connection connection = MySQLConnection.getConnection();
-		String read = "SELECT * FROM Transactions";
-		PreparedStatement p = connection.prepareStatement(read);
+		String read = "SELECT *" + " FROM Transactions";
+		PreparedStatement statement = connection.prepareStatement(read);
 		try {
-			System.out.println(p);
-			ResultSet rows = p.executeQuery();
+			ResultSet rows = statement.executeQuery();
 			while (rows.next()) {
 				int userId = rows.getInt("user_id");
 				int price = rows.getInt("price");
@@ -118,6 +131,12 @@ public class TransactionDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}

@@ -1,7 +1,7 @@
 package com.chainsys.model;
 
 public class ParkingSpots {
-	int UserId;
+	int userId;
 	String locationName;
 	String address;
 	String vehicleType;
@@ -11,7 +11,7 @@ public class ParkingSpots {
 	public ParkingSpots(int userId, String locationName, String address, String vehicleType, String spotNumber,
 			String spotStatus) {
 		super();
-		UserId = userId;
+		this.userId = userId;
 		this.locationName = locationName;
 		this.address = address;
 		this.vehicleType = vehicleType;
@@ -21,7 +21,7 @@ public class ParkingSpots {
 
 	@Override
 	public String toString() {
-		return "ParkingSpots [UserId=" + UserId + ", locationName=" + locationName + ", address=" + address
+		return "ParkingSpots [userId=" + userId + ", locationName=" + locationName + ", address=" + address
 				+ ", vehicleType=" + vehicleType + ", spotNumber=" + spotNumber + ", spotStatus=" + spotStatus
 				+ ", getUserId()=" + getUserId() + ", getLocationName()=" + getLocationName() + ", getAddress()="
 				+ getAddress() + ", getVehicleType()=" + getVehicleType() + ", getSpotNumber()=" + getSpotNumber()
@@ -29,11 +29,11 @@ public class ParkingSpots {
 	}
 
 	public int getUserId() {
-		return UserId;
+		return userId;
 	}
 
 	public void setUserId(int userId) {
-		UserId = userId;
+		this.userId = userId;
 	}
 
 	public String getLocationName() {
@@ -77,7 +77,6 @@ public class ParkingSpots {
 	}
 
 	public ParkingSpots() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

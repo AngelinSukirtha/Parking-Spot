@@ -16,18 +16,34 @@ public class ParkingSpotsDAO {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "INSERT INTO Parking_Spots (user_id, location_name, address, vehicle_type, spot_number, spot_status) VALUES (?, ?, '', '', 0, '')";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setInt(1, id);
-		statement.setString(2, parkingSpots.getLocationName());
-		statement.execute();
+		try {
+			statement.setInt(1, id);
+			statement.setString(2, parkingSpots.getLocationName());
+			statement.execute();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void addAddress(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "UPDATE Parking_Spots SET address = ? WHERE user_id = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, parkingSpots.getAddress());
-		statement.setInt(2, id);
-		statement.executeUpdate();
+		try {
+			statement.setString(1, parkingSpots.getAddress());
+			statement.setInt(2, id);
+			statement.executeUpdate();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void addSpotNumber(int id, String vehicleType, String spotNumber)
@@ -35,20 +51,27 @@ public class ParkingSpotsDAO {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "UPDATE Parking_Spots SET vehicle_type=?, spot_number = ?, spot_status='occupied' WHERE user_id = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
-		statement.setString(1, vehicleType);
-		statement.setString(2, spotNumber);
-		statement.setInt(3, id);
-		statement.executeUpdate();
+		try {
+			statement.setString(1, vehicleType);
+			statement.setString(2, spotNumber);
+			statement.setInt(3, id);
+			statement.executeUpdate();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public List<ParkingSpots> readParkingSpots() throws ClassNotFoundException, SQLException {
 		List<ParkingSpots> list = new ArrayList<>();
 		Connection connection = MySQLConnection.getConnection();
-		String read = "SELECT * FROM Parking_Spots";
-		PreparedStatement p = connection.prepareStatement(read);
+		String read = "SELECT *" + " FROM Parking_Spots";
+		PreparedStatement statement = connection.prepareStatement(read);
 		try {
-			System.out.println(p);
-			ResultSet rows = p.executeQuery();
+			ResultSet rows = statement.executeQuery();
 			while (rows.next()) {
 				int userId = rows.getInt("user_id");
 				String locationName = rows.getString("location_name");
@@ -60,6 +83,12 @@ public class ParkingSpotsDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}

@@ -2,7 +2,6 @@ package com.chainsys.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,42 +18,34 @@ import com.chainsys.model.Transactions;
 @WebServlet("/TransactionServlet")
 public class TransactionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Transactions transaction = new Transactions();
-	TransactionDAO transactionDAO = new TransactionDAO();
-	RegistrationLogin registrationLogin = new RegistrationLogin();
+	static Transactions transaction = new Transactions();
+	static TransactionDAO transactionDAO = new TransactionDAO();
+	static RegistrationLogin registrationLogin = new RegistrationLogin();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public TransactionServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String paymentMethod = request.getParameter("paymentMethod");
 		transaction.setPaymentMethod(paymentMethod);
-		System.out.println(paymentMethod);
 
 		HttpSession session = request.getSession(false);
 		RegistrationLogin registrationLogin = (RegistrationLogin) session.getAttribute("userId");
 		int id = registrationLogin.getUserId();
-		System.out.println(id);
 
 		try {
 			transactionDAO.addPaymentMethod(id, paymentMethod);

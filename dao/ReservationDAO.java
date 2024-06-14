@@ -26,11 +26,10 @@ public class ReservationDAO {
 	public List<Reservations> readReservations() throws ClassNotFoundException, SQLException {
 		List<Reservations> list = new ArrayList<>();
 		Connection connection = MySQLConnection.getConnection();
-		String read = "SELECT * FROM Reservations";
-		PreparedStatement p = connection.prepareStatement(read);
+		String read = "SELECT *" + " FROM Reservations";
+		PreparedStatement statement = connection.prepareStatement(read);
 		try {
-			System.out.println(p);
-			ResultSet rows = p.executeQuery();
+			ResultSet rows = statement.executeQuery();
 			while (rows.next()) {
 				int userId = rows.getInt("user_id");
 				String numberPlate = rows.getString("number_plate");
@@ -41,6 +40,12 @@ public class ReservationDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}

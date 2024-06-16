@@ -90,7 +90,7 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("list", list);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ParkingSpot.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("parkingSpot.jsp");
 		dispatcher.forward(request, response);
 	}
 

@@ -79,18 +79,18 @@ public class ParkingSpotsServlet extends HttpServlet {
 		switch (locationName) {
 		case "Chennai":
 			parkingSpotsDAO.addLocationName(parkingSpots, id);
-			request.getRequestDispatcher("AddressChennai.html").forward(request, response);
+			request.getRequestDispatcher("addressChennai.html").forward(request, response);
 			break;
 		case "Madurai":
 			parkingSpotsDAO.addLocationName(parkingSpots, id);
-			request.getRequestDispatcher("AddressMadurai.html").forward(request, response);
+			request.getRequestDispatcher("addressMadurai.html").forward(request, response);
 			break;
 		case "Bangalore":
 			parkingSpotsDAO.addLocationName(parkingSpots, id);
-			request.getRequestDispatcher("AddressBangalore.html").forward(request, response);
+			request.getRequestDispatcher("addressBangalore.html").forward(request, response);
 			break;
 		default:
-			request.getRequestDispatcher("Index.html").forward(request, response);
+			request.getRequestDispatcher("index.html").forward(request, response);
 			break;
 		}
 	}
@@ -103,9 +103,9 @@ public class ParkingSpotsServlet extends HttpServlet {
 				|| address.equals("Alanganallur") || address.equals("Kalavasal") || address.equals("Periyar")
 				|| address.equals("Jayanagar") || address.equals("Whitefield") || address.equals("Domlur")) {
 			parkingSpotsDAO.addAddress(parkingSpots, id);
-			request.getRequestDispatcher("Spots.jsp").forward(request, response);
+			request.getRequestDispatcher("spots.jsp").forward(request, response);
 		} else {
-			response.sendRedirect("Location.html");
+			response.sendRedirect("location.html");
 		}
 	}
 
@@ -118,7 +118,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 			parkingSpotsDAO.addSpotNumber(id, vehicleType, spotNumber);
 		}
 
-		request.getRequestDispatcher("Reservation.html").forward(request, response);
+		request.getRequestDispatcher("reservation.html").forward(request, response);
 	}
 
 	public void handleReservation(HttpServletRequest request, HttpServletResponse response, int id,
@@ -140,7 +140,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 
 		request.setAttribute("price", price);
 		request.setAttribute("transactionTime", transactionTime);
-		request.getRequestDispatcher("Transaction.jsp").forward(request, response);
+		request.getRequestDispatcher("transaction.jsp").forward(request, response);
 	}
 
 }

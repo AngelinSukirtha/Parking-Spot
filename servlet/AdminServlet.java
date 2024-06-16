@@ -105,7 +105,7 @@ public class AdminServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("list", list);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ParkingSpot.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("parkingSpot.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -118,7 +118,7 @@ public class AdminServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("list", list);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ReservationApproval.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("reservationApproval.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -131,7 +131,7 @@ public class AdminServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("list", list);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ParkingSpotManagement.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("parkingSpotManagement.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -144,7 +144,7 @@ public class AdminServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("list", list);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("TransactionManagement.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("transactionManagement.jsp");
 		dispatcher.forward(request, response);
 	}
 

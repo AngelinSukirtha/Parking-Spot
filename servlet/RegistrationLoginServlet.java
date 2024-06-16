@@ -56,9 +56,9 @@ public class RegistrationLoginServlet extends HttpServlet {
 				try {
 
 					if (registrationLoginImpl.userRegistration(registrationLogin)) {
-						response.sendRedirect("UserLogin.html");
+						response.sendRedirect("userLogin.html");
 					} else {
-						response.sendRedirect("UserRegister.html");
+						response.sendRedirect("userRegister.html");
 					}
 
 				} catch (ClassNotFoundException | SQLException e) {
@@ -69,7 +69,7 @@ public class RegistrationLoginServlet extends HttpServlet {
 			case "login":
 				try {
 					if (email.equals("angelin@parkingspot.com") && userPassword.equals("Angelin1")) {
-						RequestDispatcher dispatcher = request.getRequestDispatcher("Admin.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
 						dispatcher.forward(request, response);
 
 					} else {
@@ -80,9 +80,9 @@ public class RegistrationLoginServlet extends HttpServlet {
 							HttpSession session = request.getSession();
 							session.setAttribute("userId", userId);
 
-							request.getRequestDispatcher("Location.html").forward(request, response);
+							request.getRequestDispatcher("location.html").forward(request, response);
 						} else {
-							request.getRequestDispatcher("UserLogin.html").forward(request, response);
+							request.getRequestDispatcher("userLogin.html").forward(request, response);
 						}
 					}
 
@@ -92,7 +92,7 @@ public class RegistrationLoginServlet extends HttpServlet {
 				break;
 
 			default:
-				request.getRequestDispatcher("Index.html").forward(request, response);
+				request.getRequestDispatcher("index.html").forward(request, response);
 			}
 		}
 

@@ -68,11 +68,11 @@ public class TransactionServlet extends HttpServlet {
 			request.setAttribute("price", price);
 			request.setAttribute("transactionTime", transactionTime);
 
-			request.getRequestDispatcher("TransactionConfirmation.jsp").forward(request, response);
+			request.getRequestDispatcher("transactionConfirmation.jsp").forward(request, response);
 
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			response.sendRedirect("Transaction.jsp");
+			response.sendRedirect("transaction.jsp");
 		}
 
 	}

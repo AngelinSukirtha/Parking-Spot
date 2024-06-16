@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPDATE USER REGISTRATION</title>
+<style>
+body {
+	background-color: #000;
+	color: white;
+	background-image:
+		url('https://images.unsplash.com/photo-1517672651691-24622a91b550?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FyJTIwYW5kJTIwYmlrZXxlbnwwfHwwfHx8MA%3D%3D');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	margin-top: 50px;
+	margin: 0;
+}
+
+.container {
+	max-width: 400px;
+	margin: 50px auto;
+	padding: 20px;
+	background-color: black;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+	text-align: center;
+	color: white;
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+	font-weight: bold;
+	color: white;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #444;
+	border-radius: 5px;
+	box-sizing: border-box;
+	background-color: #333;
+	color: white;
+}
+
+input[type="submit"] {
+	width: 100%;
+	padding: 10px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+	background-color: #0056b3;
+}
+
+.register {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.register a {
+	color: blue;
+	text-decoration: none;
+}
+
+nav {
+	background-color: black;
+	opacity: 0.9;
+	overflow: hidden;
+}
+
+nav img {
+	width: 80px;
+	height: auto;
+}
+
+nav h1 {
+	color: white;
+	display: inline;
+}
+
+nav a {
+	float: right;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.topleft {
+	float: left;
+	margin: auto;
+	display: inline;
+	height: auto;
+}
+
+.btn1 {
+	display: block;
+	width: 80px;
+	margin: 5px 5px;
+	padding: 10px 20px;
+	text-align: center;
+	background-color: rgb(253, 220, 54);
+	color: black;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+}
+
+.btn1:hover {
+	background-color: rgba(253, 220, 54, 0.854);
+	color: black;
+}
+</style>
+</head>
+<body>
+	<nav>
+		<img src="Photo/logo1.png" alt="Logo" class="topleft">
+		<h1 class="topleft"
+			style="color: rgb(253, 220, 54); margin-top: 10px;">Parking</h1>
+		<h1 class="topleft" style="margin-top: 10px;">Spot</h1>
+		<a href="index.html" target="blank" class="btn1">Logout</a>
+	</nav>
+	<div class="container">
+		<h2>Update Login</h2>
+		<form action="UserServlet" method="post">
+			User Name:<input type="text" id="userName" name="userName"
+				pattern="[A-Z a-z]{5,}" required> Password: <input
+				type="password" id="userPassword" name="userPassword"
+				pattern="[A-z a-z 0-9]{8}" required> Phone Number: <input
+				type="text" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}"
+				required> Email: <input type="email" id="email" name="email"
+				pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,}$" required> <input
+				type="hidden" name="userName" value="<%=request.getParameter("editUserName") %>
+			<input type="submit" name="update">
+
+		</form>
+	</div>
+</body>
+</html>

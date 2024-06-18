@@ -160,4 +160,21 @@ public class ParkingSpotsDAO {
 		return spotList;
 	}
 
+	public void updateSpotStatus(ParkingSpots parkingSpots) throws ClassNotFoundException, SQLException {
+		Connection connection = MySQLConnection.getConnection();
+		String query = "UPDATE Parking_Spots SET spot_status=? WHERE user_id = ?";
+		PreparedStatement statement = connection.prepareStatement(query);
+		try {
+			statement.setBoolean(1, parkingSpots.getSpotStatus());
+			statement.setInt(2, parkingSpots.getUserId());
+			statement.executeUpdate();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

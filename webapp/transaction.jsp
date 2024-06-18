@@ -97,6 +97,7 @@ nav a {
 	display: inline;
 	height: auto;
 }
+
 .btn1 {
 	display: block;
 	width: 80px;
@@ -114,8 +115,9 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+
 footer {
-	margin-top: 291px;
+	margin-top: 460px;
 }
 </style>
 </head>
@@ -154,8 +156,9 @@ footer {
 			%>
 		</table>
 	</form>
-<footer
-		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+	<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">
+		<div style="text-align: center; margin-top: 20px;">
 			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
 		</div>
 	</footer>

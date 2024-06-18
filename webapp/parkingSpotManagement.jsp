@@ -75,6 +75,7 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+
 footer {
 	margin-top: 180px;
 }
@@ -99,6 +100,7 @@ footer {
 			<th style="color: black;">Vehicle Type</th>
 			<th style="color: black;">Spot Number</th>
 			<th style="color: black;">Spot Status</th>
+			<th style="color: black;">Manage</th>
 		</tr>
 		<%
 		List<ParkingSpots> list = (ArrayList<ParkingSpots>) request.getAttribute("list");
@@ -112,6 +114,16 @@ footer {
 			<td><%=parkingSpots.getVehicleType()%></td>
 			<td><%=parkingSpots.getSpotNumber()%></td>
 			<td><%=parkingSpots.getSpotStatus()%></td>
+			<td><form action="AdminServlet" method="get">
+					<input type="hidden" name="userId"
+						value="<%=parkingSpots.getUserId()%>"> <select
+						name="spotsUpdate">
+						<option>Select</option>
+						<option value="false">false</option>
+						<option value="true">true</option>
+					</select><input type="submit" name="spotsUpdate" value="update"
+						style="margin: 0 15px; border-color: rgb(253, 220, 54); background-color: white">
+				</form></td>
 		</tr>
 		<%
 		}
@@ -126,8 +138,9 @@ footer {
 				title="logout">Back</button>
 		</form>
 	</div>
-<footer
-		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+	<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">
+		<div style="text-align: center; margin-top: 20px;">
 			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
 		</div>
 	</footer>

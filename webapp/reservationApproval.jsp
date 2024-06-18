@@ -75,6 +75,7 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+
 footer {
 	margin-top: 120px;
 }
@@ -118,7 +119,7 @@ footer {
 						<option>Approved</option>
 						<option>Rejected</option>
 					</select><input type="submit" name="approval" value="update"
-						style="margin: 0 15px">
+						style="margin: 0 15px; border-color: rgb(253, 220, 54); background-color: white">
 				</form></td>
 		</tr>
 		<%
@@ -134,8 +135,9 @@ footer {
 				title="logout">Back</button>
 		</form>
 	</div>
-<footer
-		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+	<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">
+		<div style="text-align: center; margin-top: 20px;">
 			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
 		</div>
 	</footer>

@@ -44,6 +44,21 @@ public class AdminServlet extends HttpServlet {
 	 *      response)
 	 */
 	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		boolean spotStatus = Boolean.parseBoolean(request.getParameter("spotsUpdate"));
+		try {
+			parkingSpots.setUserId(userId);
+			parkingSpots.setSpotStatus(spotStatus);
+			parkingSpotsDAO.updateSpotStatus(parkingSpots);
+			handleParkingSpotManagement(request, response);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String userName = request.getParameter("userName");
@@ -92,13 +107,11 @@ public class AdminServlet extends HttpServlet {
 			}
 		}
 
-		String userId = request.getParameter("id");
-		int id = Integer.parseInt(userId);
-		reservation.setUserId(id);
-
+		int id = Integer.parseInt(request.getParameter("id"));
 		String approve = request.getParameter("approval");
-		reservation.setReservationStatus(approve);
 		try {
+			reservation.setUserId(id);
+			reservation.setReservationStatus(approve);
 			reservationDAO.updateReservationStatus(reservation);
 			handleReservationManagement(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
@@ -133,7 +146,7 @@ public class AdminServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	public void handleParkingSpotManagement(HttpServletRequest request, HttpServletResponse response)
+	public static void handleParkingSpotManagement(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		List<ParkingSpots> list = null;
 		try {
@@ -148,6 +161,7 @@ public class AdminServlet extends HttpServlet {
 
 	public void handleTransactionManagement(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
+		System.out.println("handleTransactionManagement");
 		List<Transactions> list = null;
 		try {
 			list = transactionDAO.readTransactions();

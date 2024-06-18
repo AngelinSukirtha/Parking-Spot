@@ -119,6 +119,7 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+
 footer {
 	margin-top: 120px;
 }
@@ -141,13 +142,20 @@ footer {
 				type="datetime-local" id="startDateTime" name="startDateTime"
 				min="2024-06-13" required> <label for="endDateTime">End
 				DateTime:</label> <input type="datetime-local" id="endDateTime"
-				name="endDateTime" required> <input type="submit"
-				value="Submit Reservation">
+				name="endDateTime" required>
+			<!--  <input type="hidden"
+				id="vehicleCount" name="vehicleCount" value="1">
+
+			<button type="submit" onclick="addVehicle()">Add Another
+				Vehicle</button> -->
+
+			<input type="submit" value="Submit Reservation">
 		</form>
 
 	</div>
-<footer
-		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+	<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">
+		<div style="text-align: center; margin-top: 20px;">
 			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
 		</div>
 	</footer>

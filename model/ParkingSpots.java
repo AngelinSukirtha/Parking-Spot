@@ -6,10 +6,10 @@ public class ParkingSpots {
 	String address;
 	String vehicleType;
 	String spotNumber;
-	String spotStatus;
+	boolean spotStatus = true;
 
 	public ParkingSpots(int userId, String locationName, String address, String vehicleType, String spotNumber,
-			String spotStatus) {
+			boolean spotStatus) {
 		super();
 		this.userId = userId;
 		this.locationName = locationName;
@@ -68,15 +68,18 @@ public class ParkingSpots {
 		this.spotNumber = spotNumber;
 	}
 
-	public String getSpotStatus() {
+	public boolean getSpotStatus() {
 		return spotStatus;
 	}
 
-	public void setSpotStatus(String spotStatus) {
+	public void setSpotStatus(boolean spotStatus) {
 		this.spotStatus = spotStatus;
 	}
 
 	public ParkingSpots() {
+	}
+
+	public ParkingSpots(String spotNumber2) {
 	}
 
 }

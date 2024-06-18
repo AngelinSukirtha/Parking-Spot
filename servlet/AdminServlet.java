@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.chainsys.dao.*;
 import com.chainsys.model.*;
 
@@ -89,9 +90,19 @@ public class AdminServlet extends HttpServlet {
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
-		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("Index.html");
-			dispatcher.forward(request, response);
+		}
+
+		String userId = request.getParameter("id");
+		int id = Integer.parseInt(userId);
+		reservation.setUserId(id);
+
+		String approve = request.getParameter("approval");
+		reservation.setReservationStatus(approve);
+		try {
+			reservationDAO.updateReservationStatus(reservation);
+			handleReservationManagement(request, response);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
 		}
 
 	}

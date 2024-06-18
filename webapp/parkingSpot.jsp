@@ -57,6 +57,7 @@ nav a {
 	display: inline;
 	height: auto;
 }
+
 .btn1 {
 	display: block;
 	width: 80px;
@@ -73,6 +74,9 @@ nav a {
 .btn1:hover {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
+}
+footer {
+	margin-top: 240px;
 }
 </style>
 </head>
@@ -134,5 +138,10 @@ nav a {
 				title="logout">Back</button>
 		</form>
 	</div>
+<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>

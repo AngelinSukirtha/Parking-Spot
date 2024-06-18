@@ -57,6 +57,7 @@ nav a {
 	display: inline;
 	height: auto;
 }
+
 .btn1 {
 	display: block;
 	width: 80px;
@@ -73,6 +74,9 @@ nav a {
 .btn1:hover {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
+}
+footer {
+	margin-top: 120px;
 }
 </style>
 </head>
@@ -94,6 +98,7 @@ nav a {
 			<th style="color: black;">Start Date And Time</th>
 			<th style="color: black;">End Date And Time</th>
 			<th style="color: black;">Reservation Status</th>
+			<th style="color: black;">Approval</th>
 		</tr>
 		<%
 		List<Reservations> list = (ArrayList<Reservations>) request.getAttribute("list");
@@ -106,6 +111,15 @@ nav a {
 			<td><%=reservation.getStartDateTime()%></td>
 			<td><%=reservation.getEndDateTime()%></td>
 			<td><%=reservation.getReservationStatus()%></td>
+			<td><form action="AdminServlet" method="post">
+					<input type="hidden" name="id" value="<%=reservation.getUserId()%>">
+					<select name="approval">
+						<option>Select</option>
+						<option>Approved</option>
+						<option>Rejected</option>
+					</select><input type="submit" name="approval" value="update"
+						style="margin: 0 15px">
+				</form></td>
 		</tr>
 		<%
 		}
@@ -120,5 +134,10 @@ nav a {
 				title="logout">Back</button>
 		</form>
 	</div>
+<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>

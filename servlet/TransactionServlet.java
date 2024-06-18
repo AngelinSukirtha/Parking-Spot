@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.chainsys.dao.ParkingSpotsDAO;
 import com.chainsys.dao.TransactionDAO;
+import com.chainsys.model.ParkingSpots;
 import com.chainsys.model.RegistrationLogin;
 import com.chainsys.model.Transactions;
 
@@ -21,6 +24,8 @@ public class TransactionServlet extends HttpServlet {
 	static Transactions transaction = new Transactions();
 	static TransactionDAO transactionDAO = new TransactionDAO();
 	static RegistrationLogin registrationLogin = new RegistrationLogin();
+	static ParkingSpotsDAO parkingSpotsDAO = new ParkingSpotsDAO();
+	static ParkingSpots parkingSpots = new ParkingSpots();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -50,23 +55,27 @@ public class TransactionServlet extends HttpServlet {
 		try {
 			transactionDAO.addPaymentMethod(id, paymentMethod);
 			transactionDAO.readTransactions(transaction, id);
+			parkingSpotsDAO.readSpotNumber(parkingSpots, id);
 			String userName = registrationLogin.getUserName();
 			String phoneNumber = registrationLogin.getPhoneNumber();
 			String email = registrationLogin.getEmail();
 			int price = transaction.getPrice();
 			String transactionTime = transaction.getTransactionTime();
+			String spotNumber = parkingSpots.getSpotNumber();
 
 			registrationLogin.setUserName(userName);
 			registrationLogin.setPhoneNumber(phoneNumber);
 			registrationLogin.setEmail(email);
 			transaction.setPrice(price);
 			transaction.setTransactionTime(transactionTime);
+			parkingSpots.setSpotNumber(spotNumber);
 
 			request.setAttribute("userName", userName);
 			request.setAttribute("phoneNumber", phoneNumber);
 			request.setAttribute("email", email);
 			request.setAttribute("price", price);
 			request.setAttribute("transactionTime", transactionTime);
+			request.setAttribute("spotNumber", spotNumber);
 
 			request.getRequestDispatcher("transactionConfirmation.jsp").forward(request, response);
 

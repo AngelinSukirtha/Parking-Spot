@@ -2,6 +2,10 @@ package com.chainsys.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+//import java.util.ArrayList;
+//import java.util.List;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -73,20 +77,17 @@ public class ParkingSpotsServlet extends HttpServlet {
 	}
 
 	public void handleLocation(HttpServletRequest request, HttpServletResponse response, int id, String locationName)
-			throws ServletException, IOException, ClassNotFoundException, SQLException {
+			throws ServletException, IOException {
 		parkingSpots.setLocationName(locationName);
 
 		switch (locationName) {
 		case "Chennai":
-			parkingSpotsDAO.addLocationName(parkingSpots, id);
 			request.getRequestDispatcher("addressChennai.html").forward(request, response);
 			break;
 		case "Madurai":
-			parkingSpotsDAO.addLocationName(parkingSpots, id);
 			request.getRequestDispatcher("addressMadurai.html").forward(request, response);
 			break;
 		case "Bangalore":
-			parkingSpotsDAO.addLocationName(parkingSpots, id);
 			request.getRequestDispatcher("addressBangalore.html").forward(request, response);
 			break;
 		default:
@@ -102,7 +103,11 @@ public class ParkingSpotsServlet extends HttpServlet {
 		if (address.equals("Mylapore") || address.equals("Velachery") || address.equals("Perungudi")
 				|| address.equals("Alanganallur") || address.equals("Kalavasal") || address.equals("Periyar")
 				|| address.equals("Jayanagar") || address.equals("Whitefield") || address.equals("Domlur")) {
-			parkingSpotsDAO.addAddress(parkingSpots, id);
+
+			List<String> spotList = parkingSpotsDAO.readSpotNumbers(parkingSpots);
+			request.setAttribute("spotList", spotList);
+//			parkingSpotsDAO.readSpotNumbers(parkingSpots);
+
 			request.getRequestDispatcher("spots.jsp").forward(request, response);
 		} else {
 			response.sendRedirect("location.html");
@@ -115,7 +120,13 @@ public class ParkingSpotsServlet extends HttpServlet {
 		parkingSpots.setVehicleType(vehicleType);
 
 		for (String spotNumber : selectedSpots) {
-			parkingSpotsDAO.addSpotNumber(id, vehicleType, spotNumber);
+			String cleanSpotNumber = spotNumber.substring(2, spotNumber.length() - 2);
+			String[] spotNumbers = cleanSpotNumber.split("\",\"");
+			for (String spot : spotNumbers) {
+				String trimmedSpot = spot.trim().replace("\"", "");
+
+				parkingSpotsDAO.insertSpots(parkingSpots, id, vehicleType, trimmedSpot);
+			}
 		}
 
 		request.getRequestDispatcher("reservation.html").forward(request, response);

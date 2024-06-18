@@ -114,6 +114,9 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+footer {
+	margin-top: 291px;
+}
 </style>
 </head>
 <body>
@@ -128,7 +131,6 @@ nav a {
 	<form action="TransactionServlet" method="post">
 		<table>
 			<tr>
-				<!-- <th>User ID</th> -->
 				<th>Price</th>
 				<th>Payment Method</th>
 				<th>Transaction Time</th>
@@ -139,7 +141,6 @@ nav a {
 			Transactions transaction = new Transactions();
 			%>
 			<tr>
-				<%-- <td><%=registrationLogin.getUserId()%></td> --%>
 				<td><%=request.getAttribute("price")%></td>
 				<td><select name="paymentMethod">
 						<option value="Credit Card">Credit Card</option>
@@ -153,5 +154,10 @@ nav a {
 			%>
 		</table>
 	</form>
+<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>

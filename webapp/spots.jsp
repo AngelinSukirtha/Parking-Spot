@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -159,6 +160,15 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+
+footer {
+	margin-top: 700px;
+}
+
+.cell.disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
 </style>
 </head>
 <body>
@@ -189,12 +199,27 @@ nav a {
 	<form id="parkingForm" action="ParkingSpotsServlet" method="post">
 		<input type="hidden" name="vehicleType" id="vehicleTypeInput">
 		<div class="container">
+			<%
+			/* boolean isOccupied = false; */
+			if (request.getAttribute("spotList") != null) {
+				ArrayList<String> spotList = (ArrayList<String>) request.getAttribute("spotList");
+				/* for (String spot : spotList) { */
+			%>
 			<div class="grid">
 				<%
 				for (int i = 1; i <= 20; i++) {
+					String spotId = "C" + i;
+					boolean isOccupied = false;
+					for (String spot : spotList) {
+						if (spot.equals(spotId)) {
+					isOccupied = true;
+					break;
+						}
+					}
 				%>
-				<input type="checkbox" class="checkbox-cell" id="C<%=i%>"> <label
-					for="C<%=i%>" class="cell">C<%=i%></label>
+				<input type="checkbox" class="checkbox-cell" id="<%=spotId%>"
+					<%=isOccupied ? "disabled" : ""%>> <label for="<%=spotId%>"
+					class="cell <%=isOccupied ? "occupied disabled" : ""%>"><%=spotId%></label>
 				<%
 				}
 				%>
@@ -203,9 +228,18 @@ nav a {
 			<div class="grid1">
 				<%
 				for (int i = 1; i <= 33; i++) {
+					String spotId = "B" + i;
+					boolean isOccupied = false;
+					for (String spot : spotList) {
+						if (spot.equals(spotId)) {
+					isOccupied = true;
+					break;
+						}
+					}
 				%>
-				<input type="checkbox" class="checkbox-cell" id="B<%=i%>"> <label
-					for="B<%=i%>" class="cell1">B<%=i%></label>
+				<input type="checkbox" class="checkbox-cell" id="<%=spotId%>"
+					<%=isOccupied ? "disabled" : ""%>> <label for="<%=spotId%>"
+					class="cell <%=isOccupied ? "occupied disabled" : ""%>"><%=spotId%></label>
 				<%
 				}
 				%>
@@ -214,9 +248,18 @@ nav a {
 			<div class="grid2">
 				<%
 				for (int i = 1; i <= 14; i++) {
+					String spotId = "T" + i;
+					boolean isOccupied = false;
+					for (String spot : spotList) {
+						if (spot.equals(spotId)) {
+					isOccupied = true;
+					break;
+						}
+					}
 				%>
-				<input type="checkbox" class="checkbox-cell" id="T<%=i%>"> <label
-					for="T<%=i%>" class="cell2">T<%=i%></label>
+				<input type="checkbox" class="checkbox-cell" id="<%=spotId%>"
+					<%=isOccupied ? "disabled" : ""%>> <label for="<%=spotId%>"
+					class="cell <%=isOccupied ? "occupied disabled" : ""%>"><%=spotId%></label>
 				<%
 				}
 				%>
@@ -226,6 +269,9 @@ nav a {
 					style="padding: 10px 20px; border: none; cursor: pointer; background-color: rgb(253, 220, 54); color: black; border-radius: 5px; margin-bottom: 50px; margin-left: 500px;">
 					Book Now</button>
 			</div>
+			<%
+			}
+			%>
 		</div>
 	</form>
 	<script
@@ -274,6 +320,11 @@ nav a {
 			});
 		});
 	</script>
-
+	<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">
+		<div style="text-align: center; margin-top: 20px;">
+			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>

@@ -50,4 +50,20 @@ public class ReservationDAO {
 		return list;
 	}
 
+	public void updateReservationStatus(Reservations reservation) throws ClassNotFoundException, SQLException {
+		Connection connection = MySQLConnection.getConnection();
+		String query = "UPDATE Reservations SET reservation_status=? WHERE user_id = ?";
+		PreparedStatement statement = connection.prepareStatement(query);
+		try {
+			statement.setString(1, reservation.getReservationStatus());
+			statement.setInt(2, reservation.getUserId());
+			statement.executeUpdate();
+		} finally {
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

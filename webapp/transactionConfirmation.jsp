@@ -103,6 +103,9 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+footer {
+	margin-top: 120px;
+}
 </style>
 </head>
 <body>
@@ -131,6 +134,8 @@ nav a {
 			</div>
 			<div class="confirmation">
 				<p>
+					Selected spots are<%=request.getAttribute("spotNumber")%></p>
+				<p>
 					Your payment of Rs.
 					<%=request.getAttribute("price")%>
 					has been processed.
@@ -145,6 +150,10 @@ nav a {
 			</div>
 		</form>
 	</div>
-
+<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
+		</div>
+	</footer>
 </body>
 </html>

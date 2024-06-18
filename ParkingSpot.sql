@@ -19,13 +19,14 @@ select * from Users;
 drop table Users;
 
 CREATE TABLE Parking_Spots (
-    user_id  INT,
+    user_id INT,
     location_name VARCHAR(100) NOT NULL,
     address VARCHAR(255) NOT NULL,
     vehicle_type VARCHAR(50) NOT NULL,
     spot_number VARCHAR(50) NOT NULL,
-    spot_status VARCHAR(50) NOT NULL,
-	FOREIGN KEY (user_id) REFERENCES Users(user_id));
+    spot_status BOOLEAN NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    UNIQUE KEY (location_name, spot_number));
     
 select * from Parking_Spots;
 drop table Parking_Spots;
@@ -46,7 +47,7 @@ CREATE TABLE Transactions (
     price INT,
     payment_method VARCHAR(50) NOT NULL,
     transaction_time DATETIME NOT NULL,
-    payment_status VARCHAR(50) NOT NULL,
+    payment_status VARCHAR(50) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id));    
 select * from Transactions;
 

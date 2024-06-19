@@ -2,29 +2,29 @@ package com.chainsys.model;
 
 public class Reservations {
 	int userId;
+	int reservationId;
 	String numberPlate;
 	String startDateTime;
 	String endDateTime;
 	String reservationStatus;
 
-	public Reservations(int userId, String numberPlate, String startDateTime, String endDateTime,
+	public Reservations(int userId, int reservationId, String numberPlate, String startDateTime, String endDateTime,
 			String reservationStatus) {
 		super();
 		this.userId = userId;
+		this.reservationId = reservationId;
 		this.numberPlate = numberPlate;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 		this.reservationStatus = reservationStatus;
 	}
 
-	public Reservations() {
-	}
-
 	@Override
 	public String toString() {
-		return "Reservations [userId=" + userId + ", numberPlate=" + numberPlate + ", startDateTime=" + startDateTime
-				+ ", endDateTime=" + endDateTime + ", reservationStatus=" + reservationStatus + ", getUserId()="
-				+ getUserId() + ", getNumberPlate()=" + getNumberPlate() + ", getStartDateTime()=" + getStartDateTime()
+		return "Reservations [userId=" + userId + ", reservationId=" + reservationId + ", numberPlate=" + numberPlate
+				+ ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime + ", reservationStatus="
+				+ reservationStatus + ", getUserId()=" + getUserId() + ", getReservationId()=" + getReservationId()
+				+ ", getNumberPlate()=" + getNumberPlate() + ", getStartDateTime()=" + getStartDateTime()
 				+ ", getEndDateTime()=" + getEndDateTime() + ", getReservationStatus()=" + getReservationStatus() + "]";
 	}
 
@@ -34,6 +34,14 @@ public class Reservations {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getReservationId() {
+		return reservationId;
+	}
+
+	public void setReservationId(int reservationId) {
+		this.reservationId = reservationId;
 	}
 
 	public String getNumberPlate() {
@@ -66,6 +74,9 @@ public class Reservations {
 
 	public void setReservationStatus(String reservationStatus) {
 		this.reservationStatus = reservationStatus;
+	}
+
+	public Reservations() {
 	}
 
 }

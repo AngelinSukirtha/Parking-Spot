@@ -46,10 +46,10 @@ public class AdminServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int userId = Integer.parseInt(request.getParameter("userId"));
+		int spotId = Integer.parseInt(request.getParameter("spotId"));
 		boolean spotStatus = Boolean.parseBoolean(request.getParameter("spotsUpdate"));
 		try {
-			parkingSpots.setUserId(userId);
+			parkingSpots.setSpotId(spotId);
 			parkingSpots.setSpotStatus(spotStatus);
 			parkingSpotsDAO.updateSpotStatus(parkingSpots);
 			handleParkingSpotManagement(request, response);
@@ -107,10 +107,10 @@ public class AdminServlet extends HttpServlet {
 			}
 		}
 
-		int id = Integer.parseInt(request.getParameter("id"));
+		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 		String approve = request.getParameter("approval");
 		try {
-			reservation.setUserId(id);
+			reservation.setReservationId(reservationId);
 			reservation.setReservationStatus(approve);
 			reservationDAO.updateReservationStatus(reservation);
 			handleReservationManagement(request, response);
@@ -161,7 +161,6 @@ public class AdminServlet extends HttpServlet {
 
 	public void handleTransactionManagement(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
-		System.out.println("handleTransactionManagement");
 		List<Transactions> list = null;
 		try {
 			list = transactionDAO.readTransactions();

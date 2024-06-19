@@ -123,11 +123,12 @@ public class TransactionDAO {
 			ResultSet rows = statement.executeQuery();
 			while (rows.next()) {
 				int userId = rows.getInt("user_id");
+				int transactionId = rows.getInt("transaction_id");
 				int price = rows.getInt("price");
 				String paymentMethod = rows.getString("payment_method");
 				String transactionTime = rows.getString("transaction_time");
 				String paymentStatus = rows.getString("payment_status");
-				list.add(new Transactions(userId, price, paymentMethod, transactionTime, paymentStatus));
+				list.add(new Transactions(userId, transactionId, price, paymentMethod, transactionTime, paymentStatus));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

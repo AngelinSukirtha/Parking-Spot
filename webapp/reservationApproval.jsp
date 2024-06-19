@@ -77,7 +77,7 @@ nav a {
 }
 
 footer {
-	margin-top: 120px;
+	margin-top: 402px;
 }
 </style>
 </head>
@@ -95,6 +95,7 @@ footer {
 	<table border="1">
 		<tr style="background-color: rgb(253, 220, 54); height: 40px;">
 			<th style="color: black;">User Id</th>
+			<th style="color: black;">Reservation Id</th>
 			<th style="color: black;">Number Plate</th>
 			<th style="color: black;">Start Date And Time</th>
 			<th style="color: black;">End Date And Time</th>
@@ -108,13 +109,15 @@ footer {
 		%>
 		<tr style="color: black; background-color: white; text-align: center;">
 			<td><%=reservation.getUserId()%></td>
+			<td><%=reservation.getReservationId()%></td>
 			<td><%=reservation.getNumberPlate()%></td>
 			<td><%=reservation.getStartDateTime()%></td>
 			<td><%=reservation.getEndDateTime()%></td>
 			<td><%=reservation.getReservationStatus()%></td>
 			<td><form action="AdminServlet" method="post">
-					<input type="hidden" name="id" value="<%=reservation.getUserId()%>">
-					<select name="approval">
+					<input type="hidden" name="reservationId"
+						value="<%=reservation.getReservationId()%>"> <select
+						name="approval">
 						<option>Select</option>
 						<option>Approved</option>
 						<option>Rejected</option>

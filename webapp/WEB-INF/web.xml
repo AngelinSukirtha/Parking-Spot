@@ -6,7 +6,7 @@
 	<display-name>ParkingSpot</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
+		<welcome-file>aboutUs.html</welcome-file>
 
 	</welcome-file-list>
 </web-app>

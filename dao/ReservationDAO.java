@@ -32,11 +32,13 @@ public class ReservationDAO {
 			ResultSet rows = statement.executeQuery();
 			while (rows.next()) {
 				int userId = rows.getInt("user_id");
+				int reservationId = rows.getInt("reservation_id");
 				String numberPlate = rows.getString("number_plate");
 				String startDateTime = rows.getString("start_date_time");
 				String endDateTime = rows.getString("end_date_time");
 				String reservationStatus = rows.getString("reservation_status");
-				list.add(new Reservations(userId, numberPlate, startDateTime, endDateTime, reservationStatus));
+				list.add(new Reservations(userId, reservationId, numberPlate, startDateTime, endDateTime,
+						reservationStatus));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,11 +54,11 @@ public class ReservationDAO {
 
 	public void updateReservationStatus(Reservations reservation) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "UPDATE Reservations SET reservation_status=? WHERE user_id = ?";
+		String query = "UPDATE Reservations SET reservation_status=? WHERE reservation_id = ?";
 		PreparedStatement statement = connection.prepareStatement(query);
 		try {
 			statement.setString(1, reservation.getReservationStatus());
-			statement.setInt(2, reservation.getUserId());
+			statement.setInt(2, reservation.getReservationId());
 			statement.executeUpdate();
 		} finally {
 			try {

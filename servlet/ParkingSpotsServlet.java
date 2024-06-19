@@ -2,8 +2,6 @@ package com.chainsys.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-//import java.util.ArrayList;
-//import java.util.List;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -61,9 +59,9 @@ public class ParkingSpotsServlet extends HttpServlet {
 
 		try {
 			if (locationName != null) {
-				handleLocation(request, response, id, locationName);
+				handleLocation(request, response, locationName);
 			} else if (address != null) {
-				handleAddress(request, response, id, address);
+				handleAddress(request, response, address);
 			} else if (selectedSpots != null) {
 				String vehicleType = request.getParameter("vehicleType");
 				parkingSpots.setVehicleType(vehicleType);
@@ -76,7 +74,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 		}
 	}
 
-	public void handleLocation(HttpServletRequest request, HttpServletResponse response, int id, String locationName)
+	public void handleLocation(HttpServletRequest request, HttpServletResponse response, String locationName)
 			throws ServletException, IOException {
 		parkingSpots.setLocationName(locationName);
 
@@ -96,7 +94,7 @@ public class ParkingSpotsServlet extends HttpServlet {
 		}
 	}
 
-	public void handleAddress(HttpServletRequest request, HttpServletResponse response, int id, String address)
+	public void handleAddress(HttpServletRequest request, HttpServletResponse response, String address)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		parkingSpots.setAddress(address);
 
@@ -106,7 +104,6 @@ public class ParkingSpotsServlet extends HttpServlet {
 
 			List<String> spotList = parkingSpotsDAO.readSpotNumbers(parkingSpots);
 			request.setAttribute("spotList", spotList);
-//			parkingSpotsDAO.readSpotNumbers(parkingSpots);
 
 			request.getRequestDispatcher("spots.jsp").forward(request, response);
 		} else {
@@ -124,17 +121,21 @@ public class ParkingSpotsServlet extends HttpServlet {
 			String[] spotNumbers = cleanSpotNumber.split("\",\"");
 			for (String spot : spotNumbers) {
 				String trimmedSpot = spot.trim().replace("\"", "");
-
 				parkingSpotsDAO.insertSpots(parkingSpots, id, vehicleType, trimmedSpot);
+				parkingSpotsDAO.countSpotNumber(parkingSpots, id);
+				int countSpotNumber = parkingSpots.getCountSpotNumber();
+				parkingSpots.setCountSpotNumber(countSpotNumber);
+
 			}
 		}
 
-		request.getRequestDispatcher("reservation.html").forward(request, response);
+		request.getRequestDispatcher("reservation.jsp").forward(request, response);
 	}
 
 	public void handleReservation(HttpServletRequest request, HttpServletResponse response, int id,
 			ParkingSpots parkingSpots) throws ServletException, IOException, ClassNotFoundException, SQLException {
 
+		parkingSpots.getCountSpotNumber();
 		String numberPlate = request.getParameter("numberPlate");
 		reservation.setNumberPlate(numberPlate);
 		String startDateTime = request.getParameter("startDateTime");

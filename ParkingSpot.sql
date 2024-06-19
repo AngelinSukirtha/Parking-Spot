@@ -20,6 +20,7 @@ drop table Users;
 
 CREATE TABLE Parking_Spots (
     user_id INT,
+    spot_id INT PRIMARY KEY AUTO_INCREMENT,
     location_name VARCHAR(100) NOT NULL,
     address VARCHAR(255) NOT NULL,
     vehicle_type VARCHAR(50) NOT NULL,
@@ -27,13 +28,14 @@ CREATE TABLE Parking_Spots (
     spot_status BOOLEAN NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     UNIQUE KEY (location_name, spot_number));
-    
 select * from Parking_Spots;
+
 drop table Parking_Spots;
 
 CREATE TABLE Reservations (
     user_id INT,
-    number_plate VARCHAR(20) NOT NULL,
+    reservation_id INT PRIMARY KEY AUTO_INCREMENT,
+    number_plate VARCHAR(800) NOT NULL,
     start_date_time VARCHAR(100) NOT NULL,
     end_date_time VARCHAR(100) NOT NULL,
     reservation_status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
@@ -44,6 +46,7 @@ drop table Reservations;
 
 CREATE TABLE Transactions (
     user_id INT,
+	transaction_id INT PRIMARY KEY AUTO_INCREMENT,
     price INT,
     payment_method VARCHAR(50) NOT NULL,
     transaction_time DATETIME NOT NULL,

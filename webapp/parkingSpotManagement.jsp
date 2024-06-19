@@ -77,7 +77,7 @@ nav a {
 }
 
 footer {
-	margin-top: 180px;
+	margin-top: 402px;
 }
 </style>
 </head>
@@ -95,6 +95,7 @@ footer {
 	<table border="1">
 		<tr style="background-color: rgb(253, 220, 54); height: 40px;">
 			<th style="color: black;">User Id</th>
+			<th style="color: black;">Spot Id</th>
 			<th style="color: black;">Location Name</th>
 			<th style="color: black;">Address</th>
 			<th style="color: black;">Vehicle Type</th>
@@ -109,14 +110,15 @@ footer {
 		%>
 		<tr style="color: black; background-color: white; text-align: center;">
 			<td><%=parkingSpots.getUserId()%></td>
+			<td><%=parkingSpots.getSpotId()%></td>
 			<td><%=parkingSpots.getLocationName()%></td>
 			<td><%=parkingSpots.getAddress()%></td>
 			<td><%=parkingSpots.getVehicleType()%></td>
 			<td><%=parkingSpots.getSpotNumber()%></td>
 			<td><%=parkingSpots.getSpotStatus()%></td>
 			<td><form action="AdminServlet" method="get">
-					<input type="hidden" name="userId"
-						value="<%=parkingSpots.getUserId()%>"> <select
+					<input type="hidden" name="spotId"
+						value="<%=parkingSpots.getSpotId()%>"> <select
 						name="spotsUpdate">
 						<option>Select</option>
 						<option value="false">false</option>

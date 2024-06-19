@@ -77,7 +77,7 @@ nav a {
 }
 
 footer {
-	margin-top: 240px;
+	margin-top: 400px;
 }
 </style>
 </head>

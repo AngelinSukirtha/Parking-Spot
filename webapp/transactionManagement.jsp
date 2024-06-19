@@ -75,8 +75,9 @@ nav a {
 	background-color: rgba(253, 220, 54, 0.854);
 	color: black;
 }
+
 footer {
-	margin-top: 120px;
+	margin-top: 420px;
 }
 </style>
 </head>
@@ -94,6 +95,7 @@ footer {
 	<table border="1">
 		<tr style="background-color: rgb(253, 220, 54); height: 40px;">
 			<th style="color: black;">User Id</th>
+			<th style="color: black;">Transaction Id</th>
 			<th style="color: black;">Price</th>
 			<th style="color: black;">Payment Method</th>
 			<th style="color: black;">Transaction Time</th>
@@ -106,6 +108,7 @@ footer {
 		%>
 		<tr style="color: black; background-color: white; text-align: center;">
 			<td><%=transaction.getUserId()%></td>
+			<td><%=transaction.getTransactionId()%></td>
 			<td><%=transaction.getPrice()%></td>
 			<td><%=transaction.getPaymentMethod()%></td>
 			<td><%=transaction.getTransactionTime()%></td>
@@ -124,8 +127,9 @@ footer {
 				title="logout">Back</button>
 		</form>
 	</div>
-<footer
-		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">		<div style="text-align: center; margin-top: 20px;">
+	<footer
+		style="background-color: black; opacity: 0.9; padding: 20px 0; color: white; display: flex; flex-direction: column; align-items: center;">
+		<div style="text-align: center; margin-top: 20px;">
 			<p>&copy; 2024 Parking Spot. All Rights Reserved.</p>
 		</div>
 	</footer>

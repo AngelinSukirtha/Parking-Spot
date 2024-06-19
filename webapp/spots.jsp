@@ -200,10 +200,8 @@ footer {
 		<input type="hidden" name="vehicleType" id="vehicleTypeInput">
 		<div class="container">
 			<%
-			/* boolean isOccupied = false; */
 			if (request.getAttribute("spotList") != null) {
 				ArrayList<String> spotList = (ArrayList<String>) request.getAttribute("spotList");
-				/* for (String spot : spotList) { */
 			%>
 			<div class="grid">
 				<%

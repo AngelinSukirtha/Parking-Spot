@@ -133,10 +133,10 @@ footer {
 		%>
 	</table>
 	<br>
-	<div style="margin-left: 100px;">
+	<div style="text-align: center;">
 		<form action="admin.jsp">
 			<button type="submit"
-				style="border-color: rgb(253, 220, 54); background-color: rgb(253, 220, 54)"
+				style="border-color: rgb(253, 220, 54); background-color: rgb(253, 220, 54); width: 117px; height: 37px;"
 				title="logout">Back</button>
 		</form>
 	</div>

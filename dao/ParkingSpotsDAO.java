@@ -64,7 +64,7 @@ public class ParkingSpotsDAO {
 
 	public ParkingSpots readSpotNumber(ParkingSpots parkingSpots, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "SELECT spot_number FROM Parking_Spots WHERE user_id=?";
+		String query = "SELECT spot_number FROM Parking_Spots WHERE user_id=? and spot_status = true";
 		PreparedStatement statement = connection.prepareStatement(query);
 		try {
 			statement.setInt(1, id);

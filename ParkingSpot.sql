@@ -29,7 +29,6 @@ CREATE TABLE Parking_Spots (
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     UNIQUE KEY (location_name, spot_number));
 select * from Parking_Spots;
-
 drop table Parking_Spots;
 
 CREATE TABLE Reservations (
@@ -39,19 +38,23 @@ CREATE TABLE Reservations (
     start_date_time VARCHAR(100) NOT NULL,
     end_date_time VARCHAR(100) NOT NULL,
     reservation_status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+    is_active BOOLEAN NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id));
-
 select * from Reservations;
 drop table Reservations;
 
 CREATE TABLE Transactions (
     user_id INT,
+    reservation_id INT,
 	transaction_id INT PRIMARY KEY AUTO_INCREMENT,
     price INT,
     payment_method VARCHAR(50) NOT NULL,
     transaction_time DATETIME NOT NULL,
     payment_status VARCHAR(50) NOT NULL,
+	FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id));    
 select * from Transactions;
+
+SELECT price, transaction_time FROM Transactions WHERE user_id=4 and reservation_id=14;
 
 drop table Transactions;

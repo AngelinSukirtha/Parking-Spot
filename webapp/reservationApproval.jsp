@@ -20,10 +20,11 @@ body {
 }
 
 table {
+	margin-left: 50px;
 	margin-top: 20px;
-	margin-left: 100px;
 	border-collapse: collapse;
-	width: 80%;
+	width: 90%;
+	margin-top: 20px;
 }
 
 nav {
@@ -100,7 +101,8 @@ footer {
 			<th style="color: black;">Start Date And Time</th>
 			<th style="color: black;">End Date And Time</th>
 			<th style="color: black;">Reservation Status</th>
-			<th style="color: black;">Approval</th>
+			<th style="color: black;">Active</th>
+			<th style="color: black;" colspan="2">Approval</th>
 		</tr>
 		<%
 		List<Reservations> list = (ArrayList<Reservations>) request.getAttribute("list");
@@ -114,6 +116,7 @@ footer {
 			<td><%=reservation.getStartDateTime()%></td>
 			<td><%=reservation.getEndDateTime()%></td>
 			<td><%=reservation.getReservationStatus()%></td>
+			<td><%=reservation.getIsActive()%></td>
 			<td><form action="AdminServlet" method="post">
 					<input type="hidden" name="reservationId"
 						value="<%=reservation.getReservationId()%>"> <select
@@ -124,6 +127,16 @@ footer {
 					</select><input type="submit" name="approval" value="update"
 						style="margin: 0 15px; border-color: rgb(253, 220, 54); background-color: white">
 				</form></td>
+			<td><form action="ParkingSpotsServlet" method="get">
+					<input type="hidden" name="reservationId"
+						value="<%=reservation.getReservationId()%>"> <select
+						name="isActive">
+						<option>Select</option>
+						<option>true</option>
+						<option>false</option>
+					</select><input type="submit" name="isActive" value="update"
+						style="margin: 0 15px; border-color: rgb(253, 220, 54); background-color: white">
+				</form></td>
 		</tr>
 		<%
 		}
@@ -131,10 +144,10 @@ footer {
 		%>
 	</table>
 	<br>
-	<div style="margin-left: 100px;">
+	<div style="text-align: center">
 		<form action="admin.jsp">
 			<button type="submit"
-				style="border-color: rgb(253, 220, 54); background-color: rgb(253, 220, 54)"
+				style="border-color: rgb(253, 220, 54); background-color: rgb(253, 220, 54); width: 117px; height: 37px;"
 				title="logout">Back</button>
 		</form>
 	</div>

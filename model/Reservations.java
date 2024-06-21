@@ -7,9 +7,10 @@ public class Reservations {
 	String startDateTime;
 	String endDateTime;
 	String reservationStatus;
+	boolean isActive = true;
 
 	public Reservations(int userId, int reservationId, String numberPlate, String startDateTime, String endDateTime,
-			String reservationStatus) {
+			String reservationStatus, boolean isActive) {
 		super();
 		this.userId = userId;
 		this.reservationId = reservationId;
@@ -17,15 +18,17 @@ public class Reservations {
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 		this.reservationStatus = reservationStatus;
+		this.isActive = isActive;
 	}
 
 	@Override
 	public String toString() {
 		return "Reservations [userId=" + userId + ", reservationId=" + reservationId + ", numberPlate=" + numberPlate
 				+ ", startDateTime=" + startDateTime + ", endDateTime=" + endDateTime + ", reservationStatus="
-				+ reservationStatus + ", getUserId()=" + getUserId() + ", getReservationId()=" + getReservationId()
-				+ ", getNumberPlate()=" + getNumberPlate() + ", getStartDateTime()=" + getStartDateTime()
-				+ ", getEndDateTime()=" + getEndDateTime() + ", getReservationStatus()=" + getReservationStatus() + "]";
+				+ reservationStatus + ", isActive=" + isActive + ", getUserId()=" + getUserId()
+				+ ", getReservationId()=" + getReservationId() + ", getNumberPlate()=" + getNumberPlate()
+				+ ", getStartDateTime()=" + getStartDateTime() + ", getEndDateTime()=" + getEndDateTime()
+				+ ", getReservationStatus()=" + getReservationStatus() + ", getIsActive()=" + getIsActive() + "]";
 	}
 
 	public int getUserId() {
@@ -74,6 +77,14 @@ public class Reservations {
 
 	public void setReservationStatus(String reservationStatus) {
 		this.reservationStatus = reservationStatus;
+	}
+
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public Reservations() {

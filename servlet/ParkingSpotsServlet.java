@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +46,20 @@ public class ParkingSpotsServlet extends HttpServlet {
 	 * 
 	 *      } * response)
 	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
+		boolean isActive = Boolean.parseBoolean(request.getParameter("isActive"));
+		try {
+			reservation.setReservationId(reservationId);
+			reservation.setIsActive(isActive);
+			reservationDAO.updateIsActive(reservation);
+			handleReservationManagement(request, response);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -144,8 +159,11 @@ public class ParkingSpotsServlet extends HttpServlet {
 		reservation.setEndDateTime(endDateTime);
 
 		reservationDAO.insertReservation(reservation, id);
+		reservationDAO.readReservation(reservation, id);
+		int reservationId = reservation.getReservationId();
+		transaction.setReservationId(reservationId);
 
-		transactionDAO.insertTransaction(reservation, parkingSpots, id);
+		transactionDAO.insertTransaction(reservation, transaction, parkingSpots, id);
 		transactionDAO.readTransactions(transaction, id);
 		int price = transaction.getPrice();
 		String transactionTime = transaction.getTransactionTime();
@@ -155,4 +173,16 @@ public class ParkingSpotsServlet extends HttpServlet {
 		request.getRequestDispatcher("transaction.jsp").forward(request, response);
 	}
 
+	public void handleReservationManagement(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, ClassNotFoundException, SQLException {
+		List<Reservations> list = null;
+		try {
+			list = reservationDAO.readReservations();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("list", list);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("reservationApproval.jsp");
+		dispatcher.forward(request, response);
+	}
 }

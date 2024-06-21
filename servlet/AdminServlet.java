@@ -56,6 +56,7 @@ public class AdminServlet extends HttpServlet {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
@@ -109,6 +110,7 @@ public class AdminServlet extends HttpServlet {
 
 		int reservationId = Integer.parseInt(request.getParameter("reservationId"));
 		String approve = request.getParameter("approval");
+
 		try {
 			reservation.setReservationId(reservationId);
 			reservation.setReservationStatus(approve);

@@ -2,16 +2,18 @@ package com.chainsys.model;
 
 public class Transactions {
 	int userId;
+	int reservationId;
 	int transactionId;
 	int price;
 	String paymentMethod;
 	String transactionTime;
 	String paymentStatus;
 
-	public Transactions(int userId, int transactionId, int price, String paymentMethod, String transactionTime,
-			String paymentStatus) {
+	public Transactions(int userId, int reservationId, int transactionId, int price, String paymentMethod,
+			String transactionTime, String paymentStatus) {
 		super();
 		this.userId = userId;
+		this.reservationId = reservationId;
 		this.transactionId = transactionId;
 		this.price = price;
 		this.paymentMethod = paymentMethod;
@@ -21,9 +23,10 @@ public class Transactions {
 
 	@Override
 	public String toString() {
-		return "Transactions [userId=" + userId + ", transactionId=" + transactionId + ", price=" + price
-				+ ", paymentMethod=" + paymentMethod + ", transactionTime=" + transactionTime + ", paymentStatus="
-				+ paymentStatus + ", getUserId()=" + getUserId() + ", getTransactionId()=" + getTransactionId()
+		return "Transactions [userId=" + userId + ", reservationId=" + reservationId + ", transactionId="
+				+ transactionId + ", price=" + price + ", paymentMethod=" + paymentMethod + ", transactionTime="
+				+ transactionTime + ", paymentStatus=" + paymentStatus + ", getUserId()=" + getUserId()
+				+ ", getReservationId()=" + getReservationId() + ", getTransactionId()=" + getTransactionId()
 				+ ", getPrice()=" + getPrice() + ", getPaymentMethod()=" + getPaymentMethod()
 				+ ", getTransactionTime()=" + getTransactionTime() + ", getPaymentStatus()=" + getPaymentStatus() + "]";
 	}
@@ -34,6 +37,14 @@ public class Transactions {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public int getReservationId() {
+		return reservationId;
+	}
+
+	public void setReservationId(int reservationId) {
+		this.reservationId = reservationId;
 	}
 
 	public int getTransactionId() {

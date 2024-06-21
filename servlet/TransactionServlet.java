@@ -53,7 +53,7 @@ public class TransactionServlet extends HttpServlet {
 		int id = registrationLogin.getUserId();
 
 		try {
-			transactionDAO.addPaymentMethod(id, paymentMethod);
+			transactionDAO.addPaymentMethod(transaction, id, paymentMethod);
 			transactionDAO.readTransactions(transaction, id);
 			parkingSpotsDAO.readSpotNumber(parkingSpots, id);
 			String userName = registrationLogin.getUserName();

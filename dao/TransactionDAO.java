@@ -15,10 +15,10 @@ import com.chainsys.util.MySQLConnection;
 
 public class TransactionDAO {
 
-	public void insertTransaction(Reservations reservation, ParkingSpots parkingSpots, int id)
+	public void insertTransaction(Reservations reservation, Transactions transaction, ParkingSpots parkingSpots, int id)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "INSERT INTO Transactions (user_id, price, payment_method, transaction_time, payment_status) VALUES (?, ?, '', ?, '')";
+		String query = "INSERT INTO Transactions (user_id, reservation_id, price, payment_method, transaction_time, payment_status) VALUES (?, ?, ?, '', ?, '')";
 		PreparedStatement statement = connection.prepareStatement(query);
 		try {
 			LocalDateTime start = parseDateTime(reservation.getStartDateTime());
@@ -33,8 +33,9 @@ public class TransactionDAO {
 			String transactionTimeFormatted = LocalDateTime.now().format(formatter);
 
 			statement.setInt(1, id);
-			statement.setInt(2, price);
-			statement.setString(3, transactionTimeFormatted);
+			statement.setInt(2, transaction.getReservationId());
+			statement.setInt(3, price);
+			statement.setString(4, transactionTimeFormatted);
 			statement.executeUpdate();
 		} finally {
 			try {
@@ -74,6 +75,34 @@ public class TransactionDAO {
 		return (int) (hours * hourlyRate);
 	}
 
+//	public Transactions readTransactions(Transactions transaction, int id) throws ClassNotFoundException, SQLException {
+//		Connection connection = MySQLConnection.getConnection();
+//		String query = "SELECT price, transaction_time FROM Transactions WHERE user_id=? and reservation_id=?";
+//		PreparedStatement statement = connection.prepareStatement(query);
+//		try {
+//			statement.setInt(1, id);
+//			statement.setInt(2, transaction.getReservationId());
+//			ResultSet rows = statement.executeQuery();
+//			if (rows.next()) {
+//				int price = rows.getInt("price");
+//				String time = rows.getString("transaction_time");
+//				transaction.setPrice(price);
+//				transaction.getPrice();
+//				System.out.println(price);
+//				transaction.setTransactionTime(time);
+//			    transaction.getTransactionTime();
+//				System.out.println(time);
+//			}
+//		} finally {
+//			try {
+//				statement.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return transaction;
+//	}
+
 	public Transactions readTransactions(Transactions transaction, int id) throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
 		String query = "SELECT price, transaction_time FROM Transactions WHERE user_id=?";
@@ -97,13 +126,15 @@ public class TransactionDAO {
 		return transaction;
 	}
 
-	public void addPaymentMethod(int id, String paymentMethod) throws ClassNotFoundException, SQLException {
+	public void addPaymentMethod(Transactions transaction, int id, String paymentMethod)
+			throws ClassNotFoundException, SQLException {
 		Connection connection = MySQLConnection.getConnection();
-		String query = "UPDATE Transactions SET payment_method = ?, payment_status='paid' WHERE user_id = ?";
+		String query = "UPDATE Transactions SET payment_method = ?, payment_status='paid' WHERE user_id = ? and transaction_id=?";
 		PreparedStatement statement = connection.prepareStatement(query);
 		try {
 			statement.setString(1, paymentMethod);
 			statement.setInt(2, id);
+			statement.setInt(3, transaction.getTransactionId());
 			statement.executeUpdate();
 		} finally {
 			try {
@@ -123,12 +154,14 @@ public class TransactionDAO {
 			ResultSet rows = statement.executeQuery();
 			while (rows.next()) {
 				int userId = rows.getInt("user_id");
+				int reservationId = rows.getInt("reservation_id");
 				int transactionId = rows.getInt("transaction_id");
 				int price = rows.getInt("price");
 				String paymentMethod = rows.getString("payment_method");
 				String transactionTime = rows.getString("transaction_time");
 				String paymentStatus = rows.getString("payment_status");
-				list.add(new Transactions(userId, transactionId, price, paymentMethod, transactionTime, paymentStatus));
+				list.add(new Transactions(userId, reservationId, transactionId, price, paymentMethod, transactionTime,
+						paymentStatus));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
